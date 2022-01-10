@@ -40,7 +40,7 @@ flutter:
     - assets/config/env/
 
 
- fonts:
+  fonts:
     - family: Helvetica Neue
       fonts:
         - asset: assets/fonts/helveticaneue.ttf
