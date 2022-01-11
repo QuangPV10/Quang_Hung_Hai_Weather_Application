@@ -17,6 +17,7 @@ class LocationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
     context.read<LocationBloc>().add(LocationRequested());
+
     return Scaffold(
         backgroundColor: ColorsApp.primaryBackgroundColor,
         appBar: AppBar(
@@ -108,11 +109,9 @@ class LocationScreen extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           final City city = cities.elementAt(index);
                           return GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed(
-                                  RouteNames.weatherForecast,
-                                  arguments: city.name);
-                            },
+                            onTap: () => Navigator.of(context).pushNamed(
+                                RouteNames.weatherForecast,
+                                arguments: city),
                             child: Material(
                               color: ColorsApp.primaryBackgroundColor,
                               child: ListTile(
@@ -121,7 +120,7 @@ class LocationScreen extends StatelessWidget {
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6!
-                                      .copyWith(color: Colors.white54),
+                                      .copyWith(color: Colors.white60),
                                 ),
                               ),
                             ),

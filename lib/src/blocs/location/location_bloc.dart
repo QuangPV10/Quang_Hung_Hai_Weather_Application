@@ -12,7 +12,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
       try {
         emit(LocationLoadInProgress());
         final cities = await service.fetchCity();
-        emit(LocationLoadSuccess(cities: cities));
+        emit(LocationLoadSuccess(cities: cities!));
       } catch (e) {
         emit(LocationLoadFailure(errorMessage: e.toString()));
       }

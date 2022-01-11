@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quang_hung_hai_weather_application/src/models/city.dart';
 import 'package:quang_hung_hai_weather_application/src/screens/location_screen/location_screen.dart';
 import 'package:quang_hung_hai_weather_application/src/screens/main_screen/main_screen.dart';
 import 'package:quang_hung_hai_weather_application/src/screens/not_found_screen/not_found_screen.dart';
@@ -16,7 +17,7 @@ class RouteController {
           case RouteNames.location:
             return const LocationScreen();
           case RouteNames.weatherForecast:
-            return WeatherForecastScreen(settings.arguments as String);
+            return WeatherForecastScreen(settings.arguments as City);
           default:
             return const NotFoundScreen();
         }

@@ -4,13 +4,13 @@ class City extends Equatable {
   final num id;
   final String name;
   final String country;
-  // final Coordinate coordinate;
+  final Coordinate coordinate;
 
   const City(
       {required this.id,
       required this.name,
       required this.country,
-      // required this.coordinate
+      required this.coordinate
       }
       );
 
@@ -19,7 +19,7 @@ class City extends Equatable {
         id: json['id'],
         name: json['name'],
         country: json['country'],
-        // coordinate: json['coord']
+        coordinate: Coordinate.fromJson(json['coord']) 
         );
   }
 
