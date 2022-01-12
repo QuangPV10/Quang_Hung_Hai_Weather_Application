@@ -24,28 +24,26 @@ class LocationScreen extends StatelessWidget {
           elevation: 0,
           backgroundColor: ColorsApp.primaryBackgroundColor,
           leading: TextButton(
-            child: Text(
-              AppString.done,
-              style: _theme.textTheme.bodyText2!.copyWith(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w300,
-                  color: ColorsApp.leadingTextColor),
-            ),
+            child: Text(AppString.done,
+                style: _theme.textTheme.bodyText2!.copyWith(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w300,
+                    color: ColorsApp.leadingTextColor)),
             onPressed: () => Navigator.of(context).maybePop(),
           ),
           centerTitle: true,
           title: Column(
             children: [
-              Text(
-                AppString.location,
-                style: _theme.textTheme.bodyText1!
-                    .copyWith(fontSize: 18, color: Colors.white),
-              ),
-              Text(
-                'Utrecht',
-                style: _theme.textTheme.bodyText1!.copyWith(
-                    color: ColorsApp.secondaryTextColor, fontSize: 18),
-              )
+              Text(AppString.location,
+                  style: _theme.textTheme.bodyText1!.copyWith(
+                      fontSize: 17,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w200)),
+              Text('Utrecht',
+                  style: _theme.textTheme.bodyText1!.copyWith(
+                      color: ColorsApp.secondaryTextColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w200))
             ],
           ),
         ),
@@ -63,26 +61,23 @@ class LocationScreen extends StatelessWidget {
                       FocusNode fieldFocusNode,
                       VoidCallback onFieldSubmitted) {
                     return TextField(
-                      cursorColor: ColorsApp.cursorColor,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.search,
-                              color: ColorsApp.searchIconColor),
-                          suffixIcon: IconButton(
-                              onPressed: () =>
-                                  fieldTextEditingController.clear(),
-                              icon: const Icon(Icons.close,
-                                  color: ColorsApp.searchFieldIconColor)),
-                          border: const OutlineInputBorder(
-                              borderSide: BorderSide.none),
-                          hintText: AppString.hintText),
-                      controller: fieldTextEditingController,
-                      focusNode: fieldFocusNode,
-                      style: Theme.of(context)
-                          .textTheme
-                          .subtitle1!
-                          .copyWith(fontSize: 16, color: Colors.grey.shade400),
-                    );
+                        cursorColor: ColorsApp.cursorColor,
+                        autofocus: true,
+                        decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.search,
+                                color: ColorsApp.searchIconColor),
+                            suffixIcon: IconButton(
+                                onPressed: () =>
+                                    fieldTextEditingController.clear(),
+                                icon: const Icon(Icons.close,
+                                    color: ColorsApp.searchFieldIconColor)),
+                            border: const OutlineInputBorder(
+                                borderSide: BorderSide.none),
+                            hintText: AppString.hintText),
+                        controller: fieldTextEditingController,
+                        focusNode: fieldFocusNode,
+                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            fontSize: 16, color: Colors.grey.shade400));
                   },
                   optionsBuilder: (TextEditingValue textEditingValue) {
                     if (textEditingValue.text.isEmpty) {
@@ -101,26 +96,20 @@ class LocationScreen extends StatelessWidget {
                         color: ColorsApp.primaryBackgroundColor,
                         child: ListView.separated(
                           separatorBuilder: (context, index) => const Divider(
-                            color: Colors.white,
-                            thickness: 1,
-                            indent: 17,
-                          ),
+                              color: Colors.white, thickness: 1, indent: 17),
                           padding: EdgeInsets.zero,
                           itemCount: cities.length,
                           itemBuilder: (BuildContext context, int index) {
                             final City city = cities.elementAt(index);
                             return ListTile(
-                              onTap: () => Navigator.of(context).pushNamed(
-                                  RouteNames.weatherForecast,
-                                  arguments: city),
-                              title: Text(
-                                city.name,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6!
-                                    .copyWith(color: Colors.white60),
-                              ),
-                            );
+                                onTap: () => Navigator.of(context).pushNamed(
+                                    RouteNames.weatherForecast,
+                                    arguments: city),
+                                title: Text(city.name,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6!
+                                        .copyWith(color: Colors.white60)));
                           },
                         ),
                       ),
@@ -129,9 +118,7 @@ class LocationScreen extends StatelessWidget {
                 ),
               );
             }
-            return Container(
-              color: Colors.orange,
-            );
+            return Container(color: Colors.orange);
           },
         ));
   }
