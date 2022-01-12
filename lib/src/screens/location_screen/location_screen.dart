@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quang_hung_hai_weather_application/src/widgets/load_fail_widget.dart';
 
 import '../../blocs/location/location_bloc.dart';
 import '../../blocs/location/location_event.dart';
@@ -9,6 +8,7 @@ import '../../constants/app_colors.dart';
 import '../../constants/app_string.dart';
 import '../../constants/routes_name.dart';
 import '../../models/city.dart';
+import '../../widgets/load_fail_widget.dart';
 
 class LocationScreen extends StatelessWidget {
   const LocationScreen({Key? key}) : super(key: key);
