@@ -9,6 +9,7 @@ import 'package:quang_hung_hai_weather_application/src/blocs/location/location_s
 import 'package:quang_hung_hai_weather_application/src/models/city.dart';
 import 'package:quang_hung_hai_weather_application/src/routes/route_controller.dart';
 import 'package:quang_hung_hai_weather_application/src/screens/location_screen/location_screen.dart';
+import 'package:quang_hung_hai_weather_application/src/widgets/load_fail_widget.dart';
 
 import '../../common/common_mock.dart';
 import '../../mock_data/location_data.dart';
@@ -114,6 +115,32 @@ void main() {
         of: find.byType(ListView), matching: find.byType(ListTile).first);
     expect(cityFinder, findsOneWidget);
     await tester.tap(cityFinder);
+    await tester.pumpAndSettle();
+    verifyNever(() => mockObserver.didPush(any(), any()));
+  });
+
+  testWidgets(
+      'Should render LoadFailure widget when search bloc state is [LocationLoadFailure]',
+      (tester) async {
+    when(() => locationBloc.state).thenReturn(LocationLoadFailure());
+    await tester.pumpWidget(widget);
+    await tester.pump();
+    final errorMessageFinder = find.byType(LoadFailWidget);
+    expect(errorMessageFinder, findsOneWidget);
+  });
+
+  testWidgets(
+      'Should reload when tap on TextButton when bloc state is [LocationLoadFailure]',
+      (tester) async {
+    when(() => locationBloc.state).thenReturn(LocationLoadFailure());
+    await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(LoadFailWidget));
+    await tester.pump(const Duration(seconds: 1));
+    final coinCardFinder = find.descendant(
+        of: find.byType(Container), matching: find.byType(TextButton));
+    expect(coinCardFinder, findsOneWidget);
+    await tester.tap(coinCardFinder);
     await tester.pumpAndSettle();
     verifyNever(() => mockObserver.didPush(any(), any()));
   });

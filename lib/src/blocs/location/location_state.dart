@@ -12,9 +12,9 @@ class LocationInitial extends LocationState {}
 class LocationLoadInProgress extends LocationState {}
 
 class LocationLoadFailure extends LocationState {
-  final String errorMessage;
+  final String? errorMessage;
 
-  LocationLoadFailure({required this.errorMessage});
+  LocationLoadFailure({this.errorMessage});
   @override
   List<Object?> get props => [errorMessage];
 }

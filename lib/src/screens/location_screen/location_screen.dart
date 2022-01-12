@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quang_hung_hai_weather_application/src/widgets/load_fail_widget.dart';
 
 import '../../blocs/location/location_bloc.dart';
 import '../../blocs/location/location_event.dart';
@@ -51,6 +52,12 @@ class LocationScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is LocationLoadInProgress) {
               return const Center(child: CircularProgressIndicator());
+            } else if (state is LocationLoadFailure) {
+              return LoadFailWidget(
+                  reload: () {
+                    context.read<LocationBloc>().add(LocationRequested());
+                  },
+                  title: AppString.loadFailureText);
             } else if (state is LocationLoadSuccess) {
               return Container(
                 color: ColorsApp.searchFieldColor,
