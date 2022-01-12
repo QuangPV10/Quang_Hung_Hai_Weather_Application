@@ -109,18 +109,16 @@ class LocationScreen extends StatelessWidget {
                           itemCount: cities.length,
                           itemBuilder: (BuildContext context, int index) {
                             final City city = cities.elementAt(index);
-                            return GestureDetector(
+                            return ListTile(
                               onTap: () => Navigator.of(context).pushNamed(
                                   RouteNames.weatherForecast,
                                   arguments: city),
-                              child: ListTile(
-                                title: Text(
-                                  city.name,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6!
-                                      .copyWith(color: Colors.white60),
-                                ),
+                              title: Text(
+                                city.name,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6!
+                                    .copyWith(color: Colors.white60),
                               ),
                             );
                           },
