@@ -31,7 +31,7 @@ class LocationScreen extends StatelessWidget {
                   fontWeight: FontWeight.w300,
                   color: ColorsApp.leadingTextColor),
             ),
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).maybePop(),
           ),
           centerTitle: true,
           title: Column(
@@ -96,24 +96,23 @@ class LocationScreen extends StatelessWidget {
                     });
                   },
                   optionsViewBuilder: (context, onSelected, cities) {
-                    return Container(
-                      color: ColorsApp.primaryBackgroundColor,
-                      child: ListView.separated(
-                        separatorBuilder: (context, index) => const Divider(
-                          color: Colors.white,
-                          thickness: 1,
-                          indent: 20,
-                        ),
-                        padding: EdgeInsets.zero,
-                        itemCount: cities.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final City city = cities.elementAt(index);
-                          return GestureDetector(
-                            onTap: () => Navigator.of(context).pushNamed(
-                                RouteNames.weatherForecast,
-                                arguments: city),
-                            child: Material(
-                              color: ColorsApp.primaryBackgroundColor,
+                    return Material(
+                      child: Container(
+                        color: ColorsApp.primaryBackgroundColor,
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) => const Divider(
+                            color: Colors.white,
+                            thickness: 1,
+                            indent: 17,
+                          ),
+                          padding: EdgeInsets.zero,
+                          itemCount: cities.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final City city = cities.elementAt(index);
+                            return GestureDetector(
+                              onTap: () => Navigator.of(context).pushNamed(
+                                  RouteNames.weatherForecast,
+                                  arguments: city),
                               child: ListTile(
                                 title: Text(
                                   city.name,
@@ -123,9 +122,9 @@ class LocationScreen extends StatelessWidget {
                                       .copyWith(color: Colors.white60),
                                 ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
                     );
                   },

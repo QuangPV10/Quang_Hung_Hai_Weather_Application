@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class City extends Equatable {
+class City {
   final num id;
   final String name;
   final String country;
@@ -10,24 +8,18 @@ class City extends Equatable {
       {required this.id,
       required this.name,
       required this.country,
-      required this.coordinate
-      }
-      );
+      required this.coordinate});
 
   factory City.fromJson(Map<String, dynamic> json) {
     return City(
         id: json['id'],
         name: json['name'],
         country: json['country'],
-        coordinate: Coordinate.fromJson(json['coord']) 
-        );
+        coordinate: Coordinate.fromJson(json['coord']));
   }
-
-  @override
-  List<Object?> get props => [id, name, country];
 }
 
-class Coordinate extends Equatable {
+class Coordinate {
   final num longitude;
   final num latitude;
 
@@ -42,7 +34,4 @@ class Coordinate extends Equatable {
       latitude: json['lat'],
     );
   }
-
-  @override
-  List<Object?> get props => [longitude, latitude];
 }
