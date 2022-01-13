@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './app_colors.dart';
+import 'app_colors.dart';
 
 class AppFontWeight {
   static const thin = FontWeight.w100;
@@ -12,6 +12,10 @@ class AppFontWeight {
   static const bold = FontWeight.w700;
   static const extraBold = FontWeight.w800;
   static const ultraBold = FontWeight.w900;
+}
+
+class AppFont {
+  static const String fontHelveticaNeue = "Helvetica Neue";
 }
 
 class AppTheme {
