@@ -13,7 +13,7 @@ class RouteController {
       builder: (_) {
         switch (settings.name) {
           case RouteNames.main:
-            return const MainScreen();
+            return MainScreen(settings.arguments as City);
           case RouteNames.location:
             return LocationScreen(cityName: settings.arguments as String);
           case RouteNames.weatherForecast:
