@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../blocs/location/location_bloc.dart';
 import '../../blocs/location/location_event.dart';
@@ -18,6 +19,7 @@ class LocationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
     context.read<LocationBloc>().add(LocationRequested());
+    TextEditingController _fieldTextEditingController = TextEditingController();
 
     return Scaffold(
         backgroundColor: ColorsApp.primaryBackgroundColor,
@@ -63,10 +65,9 @@ class LocationScreen extends StatelessWidget {
                 color: ColorsApp.searchFieldColor,
                 child: Autocomplete<City>(
                   displayStringForOption: displayStringForOption,
-                  fieldViewBuilder: (BuildContext context,
-                      TextEditingController fieldTextEditingController,
-                      FocusNode fieldFocusNode,
-                      VoidCallback onFieldSubmitted) {
+                  fieldViewBuilder:
+                      (context, controller, focusNode, onEditingComplete) {
+                    _fieldTextEditingController = controller;
                     return TextField(
                         cursorColor: ColorsApp.cursorColor,
                         autofocus: true,
@@ -75,14 +76,14 @@ class LocationScreen extends StatelessWidget {
                                 color: ColorsApp.searchIconColor),
                             suffixIcon: IconButton(
                                 onPressed: () =>
-                                    fieldTextEditingController.clear(),
+                                    _fieldTextEditingController.clear(),
                                 icon: const Icon(Icons.close,
                                     color: ColorsApp.searchFieldIconColor)),
                             border: const OutlineInputBorder(
                                 borderSide: BorderSide.none),
                             hintText: AppString.hintText),
-                        controller: fieldTextEditingController,
-                        focusNode: fieldFocusNode,
+                        controller: _fieldTextEditingController,
+                        focusNode: focusNode,
                         style: Theme.of(context).textTheme.subtitle1!.copyWith(
                             fontSize: 16, color: Colors.grey.shade400));
                   },
@@ -102,22 +103,28 @@ class LocationScreen extends StatelessWidget {
                       child: Container(
                         color: ColorsApp.primaryBackgroundColor,
                         child: ListView.separated(
-                          separatorBuilder: (context, index) => const Divider(
-                              color: Colors.white, thickness: 1, indent: 17),
                           padding: EdgeInsets.zero,
-                          itemCount: cities.length,
-                          itemBuilder: (BuildContext context, int index) {
+                          itemBuilder: (context, index) {
                             final City city = cities.elementAt(index);
                             return ListTile(
                                 onTap: () => Navigator.of(context).pushNamed(
                                     RouteNames.weatherForecast,
                                     arguments: city),
-                                title: Text(city.name,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6!
-                                        .copyWith(color: Colors.white60)));
+                                title: SubstringHighlight(
+                                    text: city.name,
+                                    term: _fieldTextEditingController.text,
+                                    textStyle: _theme.textTheme.headline6!
+                                        .copyWith(color: Colors.grey),
+                                    textStyleHighlight: const TextStyle(
+                                        fontWeight: FontWeight.w900,
+                                        color: Colors.white)));
                           },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const Divider(
+                                  thickness: 1,
+                                  indent: 17,
+                                  color: Colors.white),
+                          itemCount: cities.length,
                         ),
                       ),
                     );

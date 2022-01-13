@@ -85,14 +85,13 @@ void main() {
 
   testWidgets('Should clear text in TextField when tap on x button',
       (tester) async {
-    when(() => locationBloc.state).thenReturn(LocationLoadSuccess(
-      cities: _cities,
-    ));
+    when(() => locationBloc.state)
+        .thenReturn(LocationLoadSuccess(cities: _cities));
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(Container).first);
     await tester.enterText(find.byType(Container).first, 'q');
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 2));
     final textFinder = find.text('q');
     expect(textFinder, findsOneWidget);
     final iconButtonFinder = find.byType(IconButton);
@@ -109,8 +108,8 @@ void main() {
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(Container).first);
-    await tester.enterText(find.byType(Container).first, 'e');
-    await tester.pump(const Duration(seconds: 1));
+    await tester.enterText(find.byType(Container).first, 'a');
+    await tester.pump(const Duration(seconds: 2));
     final cityFinder = find.descendant(
         of: find.byType(ListView), matching: find.byType(ListTile).first);
     expect(cityFinder, findsOneWidget);
@@ -136,7 +135,7 @@ void main() {
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(LoadFailWidget));
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 2));
     final coinCardFinder = find.descendant(
         of: find.byType(Container), matching: find.byType(TextButton));
     expect(coinCardFinder, findsOneWidget);

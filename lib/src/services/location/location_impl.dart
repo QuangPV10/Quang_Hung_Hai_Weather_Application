@@ -10,8 +10,9 @@ class LocationImpl extends LocationService {
   @override
   Future<List<City>> fetchCity() async {
     final jsondata = await rootBundle.loadString(AppAssets.data);
-    final list = json.decode(jsondata) as List<dynamic>;
-    var cities = list.map((e) => City.fromJson(e)).toList();
+    Iterable responseList = json.decode(jsondata);
+    var cities =
+        List<City>.from(responseList.map((model) => City.fromJson(model)));
     return cities;
   }
 }
