@@ -12,7 +12,8 @@ import '../../models/city.dart';
 import '../../widgets/load_fail_widget.dart';
 
 class LocationScreen extends StatelessWidget {
-  const LocationScreen({Key? key}) : super(key: key);
+  final String cityName;
+  const LocationScreen({Key? key, required this.cityName}) : super(key: key);
   static String displayStringForOption(City city) => city.name;
 
   @override
@@ -42,7 +43,7 @@ class LocationScreen extends StatelessWidget {
                       fontSize: 17,
                       color: Colors.white,
                       fontWeight: FontWeight.w200)),
-              Text('Utrecht',
+              Text(cityName,
                   style: _theme.textTheme.bodyText1!.copyWith(
                       color: ColorsApp.secondaryTextColor,
                       fontSize: 16,

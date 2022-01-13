@@ -11,10 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LocationImpl _locationImpl = LocationImpl();
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LocationBloc(service: LocationImpl()),
+          create: (context) => LocationBloc(service: _locationImpl),
         ),
       ],
       child: MaterialApp(

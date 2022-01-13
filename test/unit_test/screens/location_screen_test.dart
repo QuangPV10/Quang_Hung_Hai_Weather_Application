@@ -30,7 +30,7 @@ void main() {
     create: (context) => locationBloc,
     child: MaterialApp(
       onGenerateRoute: RouteController().routePage,
-      home: const LocationScreen(),
+      home: const LocationScreen(cityName: 'London',),
     ),
   );
 

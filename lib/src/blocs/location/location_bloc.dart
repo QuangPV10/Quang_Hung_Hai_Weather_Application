@@ -9,8 +9,8 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
 
   LocationBloc({required this.service}) : super(LocationInitial()) {
     on<LocationRequested>((event, emit) async {
+      emit(LocationLoadInProgress());
       try {
-        emit(LocationLoadInProgress());
         final cities = await service.fetchCity();
         emit(LocationLoadSuccess(cities: cities!));
       } catch (e) {

@@ -1,27 +1,21 @@
 class City {
   final num id;
   final String name;
-  final String country;
   final Coordinate coordinate;
 
-  const City(
-      {required this.id,
-      required this.name,
-      required this.country,
-      required this.coordinate});
+  const City({required this.id, required this.name, required this.coordinate});
 
   factory City.fromJson(Map<String, dynamic> json) {
     return City(
         id: json['id'],
         name: json['name'],
-        country: json['country'],
         coordinate: Coordinate.fromJson(json['coord']));
   }
 }
 
 class Coordinate {
-  final num longitude;
-  final num latitude;
+  final double longitude;
+  final double latitude;
 
   const Coordinate({
     required this.longitude,
