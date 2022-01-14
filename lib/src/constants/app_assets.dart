@@ -1,6 +1,7 @@
 class AppAsset {
   static const String logoCloud = 'assets/images/cloud.png';
   static const String logoSetting = 'assets/images/setting.png';
+  static const String data = 'assets/data/city_list.json';
 }
 
 class MapImage {
@@ -15,3 +16,5 @@ class WeatherIcon {
   WeatherIcon({required this.iconID});
   late String weatherIcon = 'http://openweathermap.org/img/wn/$iconID.png';
 }
+
+

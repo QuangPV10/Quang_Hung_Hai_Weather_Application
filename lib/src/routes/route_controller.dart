@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../constants/routes_name.dart';
+import '../models/city.dart';
 import '../screens/location_screen/location_screen.dart';
 import '../screens/main_screen/main_screen.dart';
 import '../screens/not_found_screen/not_found_screen.dart';
@@ -12,18 +13,11 @@ class RouteController {
       builder: (_) {
         switch (settings.name) {
           case RouteNames.main:
-            return const MainScreen();
+            return MainScreen(settings.arguments as City);
           case RouteNames.location:
-            return const LocationScreen();
+            return LocationScreen(cityName: settings.arguments as String);
           case RouteNames.weatherForecast:
-            final city = settings.arguments as String;
-            final lon = settings.arguments as double;
-            final lat = settings.arguments as double;
-            return WeatherForecastScreen(
-              city: city,
-              lon: lon,
-              lat: lat,
-            );
+            return WeatherForecastScreen(settings.arguments as City);
           default:
             return const NotFoundScreen();
         }

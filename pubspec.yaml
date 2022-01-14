@@ -23,6 +23,7 @@ dependencies:
   syncfusion_flutter_charts: ^19.3.54
   fl_chart: ^0.41.0
   intl: ^0.17.0
+  substring_highlight: ^1.0.33
 
 dev_dependencies:
   mocktail: ^0.2.0
