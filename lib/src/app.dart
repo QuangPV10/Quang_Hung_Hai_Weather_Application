@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quang_hung_hai_weather_application/src/constants/routes_name.dart';
-import 'package:quang_hung_hai_weather_application/src/screens/main_screen/main_screen.dart';
+import 'constants/routes_name.dart';
+import 'screens/main_screen/main_screen.dart';
 
 import 'blocs/current_weather_bloc/current_weather_bloc.dart';
 import 'blocs/week_forecast_weather_bloc/week_forecast_weather_bloc.dart';

@@ -17,7 +17,5 @@ class ColorsApp {
   static const cursorColor = Color(0xff7e8083);
   static const searchIconColor = Color(0xff9e9fa4);
   static const searchResultColor = Color(0xff8f9197);
-
+  static const chartColor = Color(0Xff54C7FC);
 }
- 
-

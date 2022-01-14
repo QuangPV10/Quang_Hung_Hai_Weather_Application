@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../constants/app_theme.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../blocs/location/location_bloc.dart';
@@ -8,7 +7,7 @@ import '../../blocs/location/location_event.dart';
 import '../../blocs/location/location_state.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_string.dart';
-import '../../constants/routes_name.dart';
+import '../../constants/app_theme.dart';
 import '../../models/city.dart';
 import '../../widgets/load_fail_widget.dart';
 
@@ -110,7 +109,7 @@ class LocationScreen extends StatelessWidget {
                             final City city = cities.elementAt(index);
                             return ListTile(
                                 onTap: () {
-                                  Navigator.pop(context,city);
+                                  Navigator.pop(context, city);
                                 },
                                 title: SubstringHighlight(
                                     text: city.name,

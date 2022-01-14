@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+
 import '../models/temp_daily.dart';
 import '../constants/app_colors.dart';
 
@@ -46,7 +47,6 @@ class WeekTempChartState extends State<WeekTempChart> {
         ),
         barGroups: showingBarGroups,
         gridData: FlGridData(show: false),
-
       ),
     );
   }

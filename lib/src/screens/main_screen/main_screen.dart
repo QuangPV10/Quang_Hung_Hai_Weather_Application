@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quang_hung_hai_weather_application/src/blocs/current_weather_bloc/current_weather_bloc.dart';
-import 'package:quang_hung_hai_weather_application/src/blocs/current_weather_bloc/current_weather_event.dart';
-import 'package:quang_hung_hai_weather_application/src/blocs/current_weather_bloc/current_weather_state.dart';
-import 'package:quang_hung_hai_weather_application/src/constants/app_assets.dart';
-import 'package:quang_hung_hai_weather_application/src/constants/app_colors.dart';
-import 'package:quang_hung_hai_weather_application/src/constants/app_string.dart';
-import 'package:quang_hung_hai_weather_application/src/constants/app_theme.dart';
-import 'package:quang_hung_hai_weather_application/src/constants/routes_name.dart';
-import 'package:quang_hung_hai_weather_application/src/helper/day_format.dart';
-import 'package:quang_hung_hai_weather_application/src/models/city.dart';
-import 'package:quang_hung_hai_weather_application/src/widgets/day_temp_chart.dart';
-import 'package:quang_hung_hai_weather_application/src/widgets/map.dart';
+
+import '../../blocs/current_weather_bloc/current_weather_bloc.dart';
+import '../../blocs/current_weather_bloc/current_weather_event.dart';
+import '../../blocs/current_weather_bloc/current_weather_state.dart';
+import '../../constants/app_assets.dart';
+import '../../constants/app_colors.dart';
+import '../../constants/app_string.dart';
+import '../../constants/app_theme.dart';
+import '../../constants/routes_name.dart';
+import '../../helper/day_format.dart';
+import '../../models/city.dart';
+import '../../widgets/day_temp_chart.dart';
+import '../../widgets/map.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -51,7 +52,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Color backgroundColor = ColorsApp.backgroundColor;
 
-  Color colorOfChart = ColorsApp.tempMinChartColor.withOpacity(0.8);
+  Color colorOfChart = ColorsApp.chartColor.withOpacity(0.8);
   @override
   void initState() {
     super.initState();
@@ -195,7 +196,6 @@ class _MainScreenState extends State<MainScreen> {
               children: [
                 MapWidget(
                     lat: defaultCity.latitude, lon: defaultCity.longitude),
-
                 SizedBox(
                   height: 200,
                   child: Column(
@@ -211,27 +211,23 @@ class _MainScreenState extends State<MainScreen> {
                             return Column(
                               children: [
                                 Text(
-                                  CustomDateTimeFormat.unixTimeToHourUTC(
-                                      state
-                                          .currentWeather
-                                          .weatherHourlyAlerts[index]
-                                          .datetime),
+                                  CustomDateTimeFormat.unixTimeToHourUTC(state
+                                      .currentWeather
+                                      .weatherHourlyAlerts[index]
+                                      .datetime),
                                   style: dateTime,
                                 ),
                               ],
                             );
                           },
-                          separatorBuilder:
-                              (BuildContext context, int index) {
+                          separatorBuilder: (BuildContext context, int index) {
                             return Align(
                               alignment: Alignment.topRight,
                               child: SizedBox(
                                 width: screenWidth /
                                     (25 -
-                                        CustomDateTimeFormat
-                                            .unixTimeToHour(state
-                                            .currentWeather
-                                            .dateTime)),
+                                        CustomDateTimeFormat.unixTimeToHour(
+                                            state.currentWeather.dateTime)),
                               ),
                             );
                           },
@@ -240,7 +236,8 @@ class _MainScreenState extends State<MainScreen> {
                       SizedBox(
                         height: 100,
                         child: DayTempChart(
-                          weatherTempAlert: state.currentWeather.weatherHourlyAlerts,
+                          weatherTempAlert:
+                              state.currentWeather.weatherHourlyAlerts,
                           weather: state.currentWeather,
                           color: colorOfChart,
                         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../models/city.dart';
-import '../../constants/routes_name.dart';
 import '../../widgets/day_temp_chart.dart';
 import '../../widgets/refresh_button.dart';
 import '../../blocs/current_weather_bloc/current_weather_bloc.dart';
@@ -62,8 +62,8 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<CurrentWeatherBloc>().add(CurrentWeatherRequested(
-        lat: _city.latitude, lon: _city.longitude));
+    context.read<CurrentWeatherBloc>().add(
+        CurrentWeatherRequested(lat: _city.latitude, lon: _city.longitude));
     context.read<WeekForeCastWeatherBloc>().add(WeekForeCastWeatherRequested(
         lat: _city.latitude, lon: _city.longitude));
   }
@@ -303,8 +303,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                           child: RefreshButton(onPressed: () {
                             context.read<CurrentWeatherBloc>().add(
                                 CurrentWeatherRequested(
-                                    lat: _city.latitude,
-                                    lon: _city.longitude));
+                                    lat: _city.latitude, lon: _city.longitude));
                           }),
                         );
                       }
