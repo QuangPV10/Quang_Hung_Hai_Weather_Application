@@ -35,6 +35,11 @@ class CustomBindings extends AutomatedTestWidgetsFlutterBinding {
 
 main() {
   CustomBindings();
+
+  setUpAll(() {
+    registerFallbackValue(RouteFake());
+  });
+
   group('Weather Forecast Screen Tests', () {
     String city = "Ha Tinh";
     double lat = 34.330502;
@@ -89,6 +94,15 @@ main() {
       expect(appBar, findsOneWidget);
     });
 
+    testWidgets('Should Navigator to Location Screen', (tester) async {
+      await tester.pumpWidget(widget);
+      await tester.pumpAndSettle();
+      final inkWell = find.byType(InkWell).first;
+      expect(inkWell, findsOneWidget);
+      tester.tap(inkWell);
+      verify(() => mockObserver.didPush(any(), any()));
+    });
+
     testWidgets('Display MapWidget when state is CurrentWeatherLoadSuccess',
         (WidgetTester tester) async {
       await tester.pumpWidget(widget);
@@ -121,7 +135,6 @@ main() {
       await tester.pumpAndSettle();
     });
 
-
     testWidgets('Display RefreshButton when state is CurrentWeatherLoadFailure',
         (WidgetTester tester) async {
       currentWeatherBloc = FakeCurrentWeatherBloc();
@@ -147,7 +160,7 @@ main() {
       await tester.pumpAndSettle();
       await tester.pump();
       var refreshButton = find.byType(RefreshButton).last;
-      expect(refreshButton,findsOneWidget);
+      expect(refreshButton, findsOneWidget);
       await tester.tap(refreshButton);
       verify(() => weekForeCastWeatherBloc
           .add(WeekForeCastWeatherRequested(lat: lat, lon: lon)));

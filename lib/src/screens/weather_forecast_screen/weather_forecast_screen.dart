@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quang_hung_hai_weather_application/src/constants/routes_name.dart';
 import '../../widgets/day_temp_chart.dart';
 import '../../widgets/refresh_button.dart';
 import '../../blocs/current_weather_bloc/current_weather_bloc.dart';
@@ -122,17 +123,22 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
               child: Image.asset(AppAsset.logoCloud)),
         ),
         centerTitle: true,
-        title: Column(
-          children: [
-            Text(
-              AppString.weatherForecast,
-              style: titleAppBarStyle,
-            ),
-            Text(
-              widget.city,
-              style: titleAppBarStyle,
-            ),
-          ],
+        title: InkWell(
+          onTap: () {
+            Navigator.of(context).pushReplacementNamed(RouteNames.location);
+          },
+          child: Column(
+            children: [
+              Text(
+                AppString.weatherForecast,
+                style: titleAppBarStyle,
+              ),
+              Text(
+                widget.city,
+                style: titleAppBarStyle,
+              ),
+            ],
+          ),
         ),
         actions: [
           Padding(

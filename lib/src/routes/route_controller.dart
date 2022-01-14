@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+
+import '../constants/routes_name.dart';
 import '../screens/location_screen/location_screen.dart';
 import '../screens/main_screen/main_screen.dart';
 import '../screens/not_found_screen/not_found_screen.dart';
 import '../screens/weather_forecast_screen/weather_forecast_screen.dart';
-
-import '../constants/routes_name.dart';
 
 class RouteController {
   MaterialPageRoute routePage(RouteSettings settings) {

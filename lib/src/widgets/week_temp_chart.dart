@@ -46,6 +46,7 @@ class WeekTempChartState extends State<WeekTempChart> {
         ),
         barGroups: showingBarGroups,
         gridData: FlGridData(show: false),
+        
       ),
     );
   }
@@ -53,7 +54,6 @@ class WeekTempChartState extends State<WeekTempChart> {
   BarChartGroupData makeGroupData(
       {required double tempMin, required double tempMax}) {
     return BarChartGroupData(
-      barsSpace: 0,
       x: tempMax.toInt(),
       barRods: [
         BarChartRodData(

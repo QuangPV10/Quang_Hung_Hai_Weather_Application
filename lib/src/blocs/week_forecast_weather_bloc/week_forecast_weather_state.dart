@@ -15,7 +15,6 @@ class WeekForeCastWeatherLoadSuccess extends WeekForeCastWeatherState {
   final WeekForeCastWeather weekForeCastWeather;
   WeekForeCastWeatherLoadSuccess({required this.weekForeCastWeather});
   @override
-  // TODO: implement props
   List<Object?> get props => [weekForeCastWeather];
 }
 
