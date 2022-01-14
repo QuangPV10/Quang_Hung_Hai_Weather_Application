@@ -1,4 +1,7 @@
 {
     "ENV": "production",
-    "HOST_NAME": "api.openweathermap.org"
+
+    "HOST_NAME": "api.openweathermap.org",
+    "WEATHER_PATH": "/data/2.5/weather",
+    "WEATHER_CONDITION_SYMBOL_PATH": "/img/wn"
 }

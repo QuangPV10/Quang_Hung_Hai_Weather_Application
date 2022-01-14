@@ -12,7 +12,7 @@ class RouteController {
       builder: (_) {
         switch (settings.name) {
           case RouteNames.main:
-            return const MainScreen();
+            return MainScreen();
           case RouteNames.location:
             return const LocationScreen();
           case RouteNames.weatherForecast:
