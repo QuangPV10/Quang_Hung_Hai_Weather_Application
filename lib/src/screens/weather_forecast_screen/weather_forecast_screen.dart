@@ -63,9 +63,9 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
   void initState() {
     super.initState();
     context.read<CurrentWeatherBloc>().add(CurrentWeatherRequested(
-        lat: _city.coordinate.latitude, lon: _city.coordinate.longitude));
+        lat: _city.latitude, lon: _city.longitude));
     context.read<WeekForeCastWeatherBloc>().add(WeekForeCastWeatherRequested(
-        lat: _city.coordinate.latitude, lon: _city.coordinate.longitude));
+        lat: _city.latitude, lon: _city.longitude));
   }
 
   @override
@@ -200,8 +200,8 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                 child: Stack(
                   children: [
                     MapWidget(
-                      lat: _city.coordinate.latitude,
-                      lon: _city.coordinate.longitude,
+                      lat: _city.latitude,
+                      lon: _city.longitude,
                     ),
                     BlocBuilder<CurrentWeatherBloc, CurrentWeatherState>(
                         builder: (context, state) {
@@ -292,6 +292,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                                 weather: state.currentWeather,
                                 weatherTempAlert:
                                     state.currentWeather.weatherHourlyAlerts,
+                                color: colorOfChart,
                               ),
                             )
                           ],
@@ -302,8 +303,8 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                           child: RefreshButton(onPressed: () {
                             context.read<CurrentWeatherBloc>().add(
                                 CurrentWeatherRequested(
-                                    lat: _city.coordinate.latitude,
-                                    lon: _city.coordinate.longitude));
+                                    lat: _city.latitude,
+                                    lon: _city.longitude));
                           }),
                         );
                       }
@@ -326,8 +327,8 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                 child: Stack(
                   children: [
                     MapWidget(
-                      lat: _city.coordinate.latitude,
-                      lon: _city.coordinate.longitude,
+                      lat: _city.latitude,
+                      lon: _city.longitude,
                     ),
                     BlocBuilder<WeekForeCastWeatherBloc,
                         WeekForeCastWeatherState>(
@@ -393,8 +394,8 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                               onPressed: () {
                                 context.read<WeekForeCastWeatherBloc>().add(
                                     WeekForeCastWeatherRequested(
-                                        lat: _city.coordinate.latitude,
-                                        lon: _city.coordinate.longitude));
+                                        lat: _city.latitude,
+                                        lon: _city.longitude));
                               },
                             ),
                           );

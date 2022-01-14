@@ -21,11 +21,19 @@ class MapWidget extends StatelessWidget {
       controller: mapController,
       builder: (BuildContext context, int x, int y, int z) {
         return Container(
-          child: Image.network(
-            '${MapImage(z: z, x: x, y: y).map}',
-            fit: BoxFit.cover,
-            color: mapColor,
-            colorBlendMode: BlendMode.hardLight,
+          child: Stack(
+            children: [
+              Image.network(
+                '${MapImage(z: z, x: x, y: y).map}',
+                fit: BoxFit.cover,
+                color: mapColor,
+                colorBlendMode: BlendMode.hardLight,
+              ),
+              Image.network(
+                '${WeatherImage(z: z, x: x, y: y).map}',
+                fit: BoxFit.cover,
+              ),
+            ],
           ),
         );
       },

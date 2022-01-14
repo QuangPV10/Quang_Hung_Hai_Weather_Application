@@ -10,12 +10,13 @@ import '../models/temp_hourly.dart';
 class DayTempChart extends StatelessWidget {
   final List<DayWeather> weatherTempAlert;
   final CurrentWeather weather;
+  final Color color;
 
   DayTempChart(
-      {required this.weather, required this.weatherTempAlert, Key? key})
+      {required this.weather, required this.weatherTempAlert,required this.color, Key? key})
       : super(key: key);
   final AppTheme _theme = AppTheme();
-  Color colorOfChart = ColorsApp.maxTempChartColor.withOpacity(0.8);
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class DayTempChart extends StatelessWidget {
         color: Colors.white);
     return SfSparkBarChart.custom(
       labelStyle: labelOfChart,
-      color: colorOfChart,
+      color: color,
       negativePointColor: Colors.red,
       labelDisplayMode: SparkChartLabelDisplayMode.all,
       dataCount: 25 - CustomDateTimeFormat.unixTimeToHour(weather.dateTime),

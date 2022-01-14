@@ -8,7 +8,14 @@ class MapImage {
   late int x, y, z;
   MapImage({required this.z, required this.x, required this.y});
   late String map =
-      'https://www.google.com/maps/vt/pb=!1m4!1m3!1i$z!2i$x!3i$y!2m3!1e0!2sm!3i420120488!3m7!2sen!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0!23i4111425';
+      'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/$z/$x/$y?access_token=pk.eyJ1IjoiaGFpdHJhbjA1MDgiLCJhIjoiY2t5OGg0aHhwMHl2dTJvcW15c3g2Ymt5eiJ9.DO_CrhiqFNwDsDMwg0YrXw';
+}
+
+class WeatherImage {
+  late int x, y, z;
+  WeatherImage({required this.z, required this.x, required this.y});
+  late String map =
+      'https://tile.openweathermap.org/map/clouds_new/$z/$x/$y.png?appid=2a99675cf54960573fefa4a06f7030c6';
 }
 
 class WeatherIcon {

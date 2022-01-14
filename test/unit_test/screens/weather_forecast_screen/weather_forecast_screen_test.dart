@@ -45,8 +45,7 @@ main() {
     String cityName = "Ha Tinh";
     double lat = 34.330502;
     double lon = 47.159401;
-    Coordinate coordinate = Coordinate(longitude: lon, latitude: lat);
-    City city = City(id: 123, name: cityName, coordinate: coordinate);
+    City city = City( name: cityName, latitude: lat,longitude: lon);
 
     late WeatherService service = MockWeatherService();
     late CurrentWeatherBloc currentWeatherBloc =

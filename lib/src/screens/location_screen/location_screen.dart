@@ -109,9 +109,9 @@ class LocationScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final City city = cities.elementAt(index);
                             return ListTile(
-                                onTap: () => Navigator.of(context).pushNamed(
-                                    RouteNames.weatherForecast,
-                                    arguments: city),
+                                onTap: () {
+                                  Navigator.pop(context,city);
+                                },
                                 title: SubstringHighlight(
                                     text: city.name,
                                     term: _fieldTextEditingController.text,
