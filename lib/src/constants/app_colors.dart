@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class ColorsApp {
   static const Color backgroundColor = Color(0xff111427);
   static const Color backgroundBottomColor = Color(0xfff8f9fd);
-  static const Color chartColor = Color(0xffffe8cc);
-
+  static const Color maxTempChartColor = Color(0xffF1961C);
+  static const Color tempMinChartColor = Color(0xff6B87BC);
+  static const Color blurMapColor = Color(0xff4E555E);
 
   static const primaryBackgroundColor = Color(0xff4e555e);
   static const secondaryBackgroundColor = Color(0xff3A424C);
