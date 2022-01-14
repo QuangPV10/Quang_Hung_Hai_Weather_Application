@@ -5,5 +5,5 @@ import 'package:quang_hung_hai_weather_application/src/models/position.dart';
 abstract class WeatherService {
   WeatherService();
 
-  Future<CurrentWeather> fetchWeather({required Position position});
+  Future<CurrentWeather>? fetchWeather({required Position position});
 }

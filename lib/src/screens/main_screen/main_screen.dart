@@ -15,7 +15,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<WeatherBloc>().add(
           WeatherRequested(
-            position: Position(lat: 21, lon: 105, zoom: 8),
+            position: Position(lat: 10.75, lon: 106.6667, zoom: 11),
           ),
         );
     return Scaffold(
@@ -23,6 +23,9 @@ class MainScreen extends StatelessWidget {
         backgroundColor: ColorsApp.primaryBackgroundColor,
         leading: BlocBuilder<WeatherBloc, WeatherState>(
           builder: (context, state) {
+            if (state is WeatherLoadInProgress) {
+              return const Center(child: CircularProgressIndicator());
+            }
             if (state is WeatherLoadSuccess) {
               if (state.weather.weatherConditionSymbol != null) {
                 return Image(
@@ -30,48 +33,70 @@ class MainScreen extends StatelessWidget {
               } else {
                 return const SizedBox.shrink();
               }
-            } else {
-              return const CircularProgressIndicator();
             }
+            if (state is WeatherLoadFailure) {
+              return Container(
+                color: Colors.white,
+                alignment: Alignment.center,
+                child: Text(state.errorMessage!),
+              );
+            }
+            return Container(
+              color: Colors.orange,
+            );
           },
         ),
         toolbarHeight: 50,
         title: Center(
           child: BlocBuilder<WeatherBloc, WeatherState>(
             builder: (context, state) {
-              if (state is WeatherLoadSuccess) {
-                return Column(
-                  children: [
-                    Text(
-                      state.weather.cityName,
-                      style: const TextStyle(
-                          fontSize: 15, color: ColorsApp.primaryTextColor),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          state.weather.weatherCondition,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            color: ColorsApp.primaryTextColor,
-                          ),
-                        ),
-                        const SizedBox(width: 5),
-                        Text(
-                          state.weather.temperature,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            color: ColorsApp.primaryTextColor,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                );
-              } else {
-                return const CircularProgressIndicator();
+              if (state is WeatherLoadInProgress) {
+                return const Center(child: CircularProgressIndicator());
               }
+              if (state is WeatherLoadSuccess) {
+                return GestureDetector(
+                  onTap: () {},
+                  child: Column(
+                    children: [
+                      Text(
+                        state.weather.cityName,
+                        style: const TextStyle(
+                            fontSize: 15, color: ColorsApp.primaryTextColor),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            state.weather.weatherCondition,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: ColorsApp.primaryTextColor,
+                            ),
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            state.weather.temperature,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: ColorsApp.primaryTextColor,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              }
+              if (state is WeatherLoadFailure) {
+                return Container(
+                  color: Colors.white,
+                  alignment: Alignment.center,
+                  child: Text(state.errorMessage!),
+                );
+              }
+              return Container(
+                color: Colors.orange,
+              );
             },
           ),
         ),

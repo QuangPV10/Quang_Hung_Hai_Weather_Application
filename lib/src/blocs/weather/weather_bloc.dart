@@ -9,10 +9,15 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   WeatherBloc({required this.service}) : super(WeatherInitial()) {
     on<WeatherRequested>((event, emit) async {
       try {
-        CurrentWeather _weather;
+        CurrentWeather? _weather;
 
         emit(WeatherLoadInProgress());
+
         _weather = await service.fetchWeather(position: event.position);
+
+        if (_weather == null) {
+          throw Exception('There is no weather forecast');
+        }
         emit(WeatherLoadSuccess(weather: _weather));
       } catch (e) {
         emit(WeatherLoadFailure(errorMessage: e.toString()));

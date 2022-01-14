@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:mockito/mockito.dart';
 import 'package:quang_hung_hai_weather_application/src/blocs/weather/weather_bloc.dart';
 import 'package:quang_hung_hai_weather_application/src/blocs/weather/weather_event.dart';
@@ -17,6 +18,12 @@ main() {
 
   setUp(() {
     weatherService = MockWeatherService();
+
+    fakeWeather = CurrentWeather(
+        cityName: 'name',
+        position: Position(lat: 1, lon: 1),
+        temperature: '1',
+        weatherCondition: 'condition');
   });
 
   blocTest(
@@ -31,12 +38,6 @@ main() {
   blocTest(
     'emits [WeatherLoadInProgress] then [WeatherLoadSucess] when [WeatherRequested] is called',
     build: () {
-      fakeWeather = CurrentWeather(
-          cityName: 'name',
-          position: Position(lat: 1, lon: 1),
-          temperature: '1',
-          weatherCondition: 'condition');
-
       when(weatherService.fetchWeather(position: Position(lat: 1, lon: 1)))
           .thenAnswer(
         (_) async => fakeWeather,
@@ -50,6 +51,23 @@ main() {
       return [
         WeatherLoadInProgress(),
         WeatherLoadSuccess(weather: fakeWeather),
+      ];
+    },
+  );
+  blocTest(
+    'emits [WeatherLoadFailure]  when [WeatherRequested] is called',
+    build: () {
+      when(weatherService.fetchWeather(position: Position(lat: 1, lon: 1)))
+          .thenThrow(Exception());
+
+      return WeatherBloc(service: weatherService);
+    },
+    act: (WeatherBloc bloc) =>
+        bloc.add(WeatherRequested(position: Position(lat: 1, lon: 1))),
+    expect: () {
+      return [
+        WeatherLoadInProgress(),
+        WeatherLoadFailure(errorMessage: Exception().toString())
       ];
     },
   );
