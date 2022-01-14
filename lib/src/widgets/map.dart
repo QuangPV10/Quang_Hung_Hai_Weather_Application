@@ -6,10 +6,10 @@ import '../constants/app_assets.dart';
 import '../constants/app_colors.dart';
 
 class MapWidget extends StatelessWidget {
-  double lat;
-  double lon;
+  final double lat;
+  final double lon;
 
-  MapWidget({required this.lat, required this.lon});
+  MapWidget({Key? key, required this.lat, required this.lon}) : super(key: key);
 
   Color mapColor = ColorsApp.blurMapColor;
 
@@ -21,21 +21,19 @@ class MapWidget extends StatelessWidget {
     return Map(
       controller: mapController,
       builder: (BuildContext context, int x, int y, int z) {
-        return Container(
-          child: Stack(
-            children: [
-              Image.network(
-                '${MapImage(z: z, x: x, y: y).map}',
-                fit: BoxFit.cover,
-                color: mapColor,
-                colorBlendMode: BlendMode.hardLight,
-              ),
-              Image.network(
-                '${WeatherImage(z: z, x: x, y: y).map}',
-                fit: BoxFit.cover,
-              ),
-            ],
-          ),
+        return Stack(
+          children: [
+            Image.network(
+              '${MapImage(z: z, x: x, y: y).map}',
+              fit: BoxFit.cover,
+              color: mapColor,
+              colorBlendMode: BlendMode.hardLight,
+            ),
+            Image.network(
+              '${WeatherImage(z: z, x: x, y: y).map}',
+              fit: BoxFit.cover,
+            ),
+          ],
         );
       },
     );

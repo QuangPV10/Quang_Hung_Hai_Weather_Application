@@ -23,7 +23,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   City defaultCity =
-      City(name: "Hồ Chí Minh", longitude: 106.6667, latitude: 10.75);
+      const City(name: "Hồ Chí Minh", longitude: 106.6667, latitude: 10.75);
   double heightOfLeadingLogoAppBar = 48;
 
   double heightOfActionLogoAppBar = 30;
@@ -77,33 +77,6 @@ class _MainScreenState extends State<MainScreen> {
         fontWeight: AppFontWeight.light,
         fontSize: 18,
         color: ColorsApp.secondaryTextColor);
-
-    TextStyle titleOfForecast = _theme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.regular,
-        fontSize: 18,
-        color: Colors.white);
-
-    TextStyle monthOfForecast = _theme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.regular,
-        fontSize: 18,
-        color: ColorsApp.secondaryTextColor);
-
-    TextStyle currentTemp = _theme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.thin,
-        fontSize: 100,
-        color: Colors.white);
-
-    TextStyle currentCity = _theme.textTheme.bodyText1!.copyWith(
-        fontWeight: AppFontWeight.regular, fontSize: 38, color: Colors.white);
-
-    TextStyle currentWeather = _theme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.regular,
-        fontSize: 20,
-        color: Colors.white);
 
     TextStyle dateTime = _theme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,

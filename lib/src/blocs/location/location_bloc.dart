@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 
 import '../../services/location/location_service.dart';
-import 'location_event.dart';
-import 'location_state.dart';
+import './location_event.dart';
+import './location_state.dart';
 
 class LocationBloc extends Bloc<LocationEvent, LocationState> {
   final LocationService service;

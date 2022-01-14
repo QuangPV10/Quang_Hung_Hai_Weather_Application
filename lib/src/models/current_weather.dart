@@ -1,5 +1,5 @@
-import 'temp_hourly.dart';
-import 'weather.dart';
+import './temp_hourly.dart';
+import './weather.dart';
 
 class CurrentWeather {
   late int dateTime;

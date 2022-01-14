@@ -1,6 +1,6 @@
 import 'dart:core';
 
-import 'temp_daily.dart';
+import './temp_daily.dart';
 
 class WeekForeCastWeather {
   late List<WeekWeather> listWeekWeather;

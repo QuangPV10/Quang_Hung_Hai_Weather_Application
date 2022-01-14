@@ -1,4 +1,4 @@
-import 'weather.dart';
+import './weather.dart';
 
 class WeekWeather {
   late double tempMax;

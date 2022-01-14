@@ -2,8 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/current_weather.dart';
 import '../../services/weather_service/weather_service.dart';
-import 'current_weather_event.dart';
-import 'current_weather_state.dart';
+import './current_weather_event.dart';
+import './current_weather_state.dart';
 
 class CurrentWeatherBloc
     extends Bloc<CurrentWeatherEvent, CurrentWeatherState> {

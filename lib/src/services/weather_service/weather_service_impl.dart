@@ -6,7 +6,7 @@ import '../../config/app_config.dart';
 import '../../config/constants.dart';
 import '../../models/current_weather.dart';
 import '../../models/week_forecast_weather.dart';
-import 'weather_service.dart';
+import './weather_service.dart';
 
 class WeatherServiceImpl extends WeatherService {
   @override

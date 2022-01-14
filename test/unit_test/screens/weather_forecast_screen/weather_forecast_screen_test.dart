@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -22,7 +21,6 @@ import 'package:quang_hung_hai_weather_application/src/widgets/map.dart';
 import 'package:quang_hung_hai_weather_application/src/widgets/refresh_button.dart';
 
 import '../../../mock_data/curent_weather_bloc_fake.dart';
-import '../../../mock_data/current_weather_mock_data.dart';
 import '../../../mock_data/week_weather_forecast_bloc_fake.dart';
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
