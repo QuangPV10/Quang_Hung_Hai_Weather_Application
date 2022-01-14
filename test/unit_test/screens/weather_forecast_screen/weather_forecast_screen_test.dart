@@ -17,8 +17,8 @@ import 'package:quang_hung_hai_weather_application/src/models/week_forecast_weat
 import 'package:quang_hung_hai_weather_application/src/routes/route_controller.dart';
 import 'package:quang_hung_hai_weather_application/src/screens/weather_forecast_screen/weather_forecast_screen.dart';
 import 'package:quang_hung_hai_weather_application/src/services/weather_service/weather_service.dart';
+import 'package:quang_hung_hai_weather_application/src/widgets/load_fail_widget.dart';
 import 'package:quang_hung_hai_weather_application/src/widgets/map.dart';
-import 'package:quang_hung_hai_weather_application/src/widgets/refresh_button.dart';
 
 import '../../../mock_data/curent_weather_bloc_fake.dart';
 import '../../../mock_data/week_weather_forecast_bloc_fake.dart';
@@ -92,15 +92,6 @@ main() {
       expect(appBar, findsOneWidget);
     });
 
-    testWidgets('Should Navigator to Location Screen', (tester) async {
-      await tester.pumpWidget(widget);
-      await tester.pumpAndSettle();
-      final inkWell = find.byType(InkWell).first;
-      expect(inkWell, findsOneWidget);
-      tester.tap(inkWell);
-      verify(() => mockObserver.didPush(any(), any()));
-    });
-
     testWidgets('Display MapWidget when state is CurrentWeatherLoadSuccess',
         (WidgetTester tester) async {
       await tester.pumpWidget(widget);
@@ -141,7 +132,7 @@ main() {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
       await tester.pump();
-      var refreshButton = find.byType(RefreshButton).first;
+      var refreshButton = find.byType(LoadFailWidget).first;
       expect(refreshButton, findsOneWidget);
       await tester.tap(refreshButton);
       verify(() =>
@@ -157,7 +148,7 @@ main() {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
       await tester.pump();
-      var refreshButton = find.byType(RefreshButton).last;
+      var refreshButton = find.byType(LoadFailWidget).last;
       expect(refreshButton, findsOneWidget);
       await tester.tap(refreshButton);
       verify(() => weekForeCastWeatherBloc

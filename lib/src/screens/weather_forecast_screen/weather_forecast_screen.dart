@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quang_hung_hai_weather_application/src/widgets/custom_app_bar.dart';
+import 'package:quang_hung_hai_weather_application/src/widgets/load_fail_widget.dart';
 
 import '../../models/city.dart';
 import '../../widgets/day_temp_chart.dart';
-import '../../widgets/refresh_button.dart';
 import '../../blocs/current_weather_bloc/current_weather_bloc.dart';
 import '../../blocs/current_weather_bloc/current_weather_event.dart';
 import '../../blocs/current_weather_bloc/current_weather_state.dart';
@@ -72,18 +73,6 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
     double screenWidth = MediaQuery.of(context).size.width;
-    TextStyle titleAppBarStyle = _theme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.light,
-        fontSize: 18,
-        color: Colors.white);
-
-    TextStyle subTitleAppBarStyle = _theme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.light,
-        fontSize: 18,
-        color: ColorsApp.secondaryTextColor);
-
     TextStyle titleOfForecast = _theme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
         fontWeight: AppFontWeight.regular,
@@ -117,36 +106,23 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
         fontSize: 13,
         color: Colors.white.withOpacity(1));
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: backgroundColor,
-        leading: Padding(
+      appBar: CustomAppBar(
+        widgetLeading: Padding(
           padding: EdgeInsets.only(left: paddingHorizontalOfTitle),
           child: SizedBox(
               height: heightOfLeadingLogoAppBar,
               width: widthOfLeadingLogoAppBar,
               child: Image.asset(AppAsset.logoCloud)),
         ),
-        centerTitle: true,
-        title: Column(
-          children: [
-            Text(
-              AppString.weatherForecast,
-              style: titleAppBarStyle,
-            ),
-            Text(
-              _city.name,
-              style: subTitleAppBarStyle,
-            ),
-          ],
-        ),
-        actions: [
+        title: AppString.weatherForecast,
+        subtitle: _city.name,
+        actionWidget: [
           Padding(
-            padding: EdgeInsets.only(right: paddingHorizontalOfTitle),
-            child: SizedBox(
-                height: heightOfActionLogoAppBar,
-                width: widthOfActionLogoAppBar,
-                child: Image.asset(AppAsset.logoSetting)),
-          ),
+              padding: EdgeInsets.only(right: paddingHorizontalOfTitle),
+              child: SizedBox(
+                  height: heightOfActionLogoAppBar,
+                  width: widthOfActionLogoAppBar,
+                  child: Image.asset(AppAsset.logoSetting))),
         ],
       ),
       body: Container(
@@ -300,11 +276,15 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                       }
                       if (state is CurrentWeatherLoadFailure) {
                         return Center(
-                          child: RefreshButton(onPressed: () {
-                            context.read<CurrentWeatherBloc>().add(
-                                CurrentWeatherRequested(
-                                    lat: _city.latitude, lon: _city.longitude));
-                          }),
+                          child: LoadFailWidget(
+                            reload: () {
+                              context.read<CurrentWeatherBloc>().add(
+                                  CurrentWeatherRequested(
+                                      lat: _city.latitude,
+                                      lon: _city.longitude));
+                            },
+                            title: AppString.loadFailureText,
+                          ),
                         );
                       }
                       return const SizedBox();
@@ -389,13 +369,14 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                         }
                         if (state is WeekForeCastWeatherLoadFailure) {
                           return Center(
-                            child: RefreshButton(
-                              onPressed: () {
+                            child: LoadFailWidget(
+                              reload: () {
                                 context.read<WeekForeCastWeatherBloc>().add(
                                     WeekForeCastWeatherRequested(
                                         lat: _city.latitude,
                                         lon: _city.longitude));
                               },
+                              title: AppString.loadFailureText,
                             ),
                           );
                         }

@@ -64,6 +64,10 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    const double _heightOfColumn = 150;
+    const double _heightOfChart = 50;
+
     final _theme = Theme.of(context);
     double screenWidth = MediaQuery.of(context).size.width;
     TextStyle titleAppBarStyle = _theme.textTheme.bodyText2!.copyWith(
@@ -80,18 +84,25 @@ class _MainScreenState extends State<MainScreen> {
 
     TextStyle dateTime = _theme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.thin,
+        fontWeight: AppFontWeight.bold,
         fontSize: 13,
         color: Colors.white.withOpacity(1));
     return Scaffold(
-      appBar: AppBar(
+      appBar: 
+      
+      AppBar(
         backgroundColor: ColorsApp.primaryBackgroundColor,
         leading: Padding(
           padding: EdgeInsets.only(left: paddingHorizontalOfTitle),
           child: SizedBox(
               height: heightOfLeadingLogoAppBar,
               width: widthOfLeadingLogoAppBar,
-              child: Image.asset(AppAsset.logoCloud)),
+              child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, RouteNames.weatherForecast,
+                        arguments: defaultCity);
+                  },
+                  child: Image.asset(AppAsset.logoCloud))),
         ),
         toolbarHeight: 50,
         title: Center(
@@ -170,7 +181,7 @@ class _MainScreenState extends State<MainScreen> {
                 MapWidget(
                     lat: defaultCity.latitude, lon: defaultCity.longitude),
                 SizedBox(
-                  height: 200,
+                  height: _heightOfColumn,
                   child: Column(
                     children: [
                       Expanded(
@@ -207,7 +218,7 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 100,
+                        height: _heightOfChart,
                         child: DayTempChart(
                           weatherTempAlert:
                               state.currentWeather.weatherHourlyAlerts,

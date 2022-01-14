@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quang_hung_hai_weather_application/src/widgets/custom_app_bar.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../blocs/location/location_bloc.dart';
@@ -7,7 +8,6 @@ import '../../blocs/location/location_event.dart';
 import '../../blocs/location/location_state.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_string.dart';
-import '../../constants/app_theme.dart';
 import '../../models/city.dart';
 import '../../widgets/load_fail_widget.dart';
 
@@ -24,31 +24,16 @@ class LocationScreen extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: ColorsApp.primaryBackgroundColor,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: ColorsApp.primaryBackgroundColor,
-          leading: TextButton(
+        appBar: CustomAppBar(
+          subtitle: cityName,
+          title: AppString.location,
+          widgetLeading: TextButton(
             child: Text(AppString.done,
                 style: _theme.textTheme.bodyText2!.copyWith(
                     fontSize: 17,
                     fontWeight: FontWeight.w400,
                     color: ColorsApp.leadingTextColor)),
             onPressed: () => Navigator.of(context).maybePop(),
-          ),
-          centerTitle: true,
-          title: Column(
-            children: [
-              Text(AppString.location,
-                  style: _theme.textTheme.bodyText1!.copyWith(
-                      fontSize: 17,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400)),
-              Text(cityName,
-                  style: _theme.textTheme.bodyText1!.copyWith(
-                      color: ColorsApp.secondaryTextColor,
-                      fontSize: 16,
-                      fontWeight: AppFontWeight.light))
-            ],
           ),
         ),
         body: BlocBuilder<LocationBloc, LocationState>(
