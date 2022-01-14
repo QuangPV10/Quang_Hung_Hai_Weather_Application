@@ -46,7 +46,7 @@ class WeekTempChartState extends State<WeekTempChart> {
         ),
         barGroups: showingBarGroups,
         gridData: FlGridData(show: false),
-        
+
       ),
     );
   }

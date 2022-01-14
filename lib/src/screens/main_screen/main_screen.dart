@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quang_hung_hai_weather_application/src/models/city.dart';
+import '../../models/city.dart';
 
 class MainScreen extends StatelessWidget {
   final City city;

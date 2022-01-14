@@ -9,6 +9,7 @@ import 'package:quang_hung_hai_weather_application/src/blocs/current_weather_blo
 import 'package:quang_hung_hai_weather_application/src/blocs/week_forecast_weather_bloc/week_forecast_weather_bloc.dart';
 import 'package:quang_hung_hai_weather_application/src/blocs/week_forecast_weather_bloc/week_forecast_weather_event.dart';
 import 'package:quang_hung_hai_weather_application/src/blocs/week_forecast_weather_bloc/week_forecast_weather_state.dart';
+import 'package:quang_hung_hai_weather_application/src/models/city.dart';
 import 'package:quang_hung_hai_weather_application/src/models/current_weather.dart';
 import 'package:quang_hung_hai_weather_application/src/models/temp_daily.dart';
 import 'package:quang_hung_hai_weather_application/src/models/temp_hourly.dart';
@@ -41,9 +42,11 @@ main() {
   });
 
   group('Weather Forecast Screen Tests', () {
-    String city = "Ha Tinh";
+    String cityName = "Ha Tinh";
     double lat = 34.330502;
     double lon = 47.159401;
+    Coordinate coordinate = Coordinate(longitude: lon, latitude: lat);
+    City city = City(id: 123, name: cityName, coordinate: coordinate);
 
     late WeatherService service = MockWeatherService();
     late CurrentWeatherBloc currentWeatherBloc =
@@ -80,8 +83,6 @@ main() {
         ],
         child: WeatherForecastScreen(
           city: city,
-          lon: lon,
-          lat: lat,
         ),
       ),
     );

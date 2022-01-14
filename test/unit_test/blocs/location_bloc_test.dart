@@ -21,7 +21,7 @@ main() {
     'emits [LocationLoadInProgress] then [LocationLoadSucess] when [LocationRequested] is called',
     build: () {
       locationService = MockLocationService();
-      when(locationService.fetchCity()).thenAnswer((_) async => []);
+      when(locationService.fetchAllCity()).thenAnswer((_) async => []);
       return LocationBloc(service: locationService);
     },
     act: (LocationBloc bloc) => bloc.add(LocationRequested()),
@@ -35,7 +35,7 @@ main() {
     'emits [LocationLoadFailure] when [LocationRequested] is called and service throws error.',
     build: () {
       locationService = MockLocationService();
-      when(locationService.fetchCity()).thenThrow(Exception());
+      when(locationService.fetchAllCity()).thenThrow(Exception());
       return LocationBloc(service: locationService);
     },
     act: (LocationBloc bloc) => bloc.add(LocationRequested()),

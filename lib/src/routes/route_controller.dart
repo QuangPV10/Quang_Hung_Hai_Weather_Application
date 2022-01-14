@@ -17,7 +17,7 @@ class RouteController {
           case RouteNames.location:
             return LocationScreen(cityName: settings.arguments as String);
           case RouteNames.weatherForecast:
-            return WeatherForecastScreen(settings.arguments as City);
+            return WeatherForecastScreen(city: settings.arguments as City);
           default:
             return const NotFoundScreen();
         }

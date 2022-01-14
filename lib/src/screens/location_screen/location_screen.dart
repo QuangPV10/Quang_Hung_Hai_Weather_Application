@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../constants/app_theme.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../blocs/location/location_bloc.dart';
@@ -31,7 +32,7 @@ class LocationScreen extends StatelessWidget {
             child: Text(AppString.done,
                 style: _theme.textTheme.bodyText2!.copyWith(
                     fontSize: 17,
-                    fontWeight: FontWeight.w300,
+                    fontWeight: FontWeight.w400,
                     color: ColorsApp.leadingTextColor)),
             onPressed: () => Navigator.of(context).maybePop(),
           ),
@@ -42,12 +43,12 @@ class LocationScreen extends StatelessWidget {
                   style: _theme.textTheme.bodyText1!.copyWith(
                       fontSize: 17,
                       color: Colors.white,
-                      fontWeight: FontWeight.w200)),
+                      fontWeight: FontWeight.w400)),
               Text(cityName,
                   style: _theme.textTheme.bodyText1!.copyWith(
                       color: ColorsApp.secondaryTextColor,
                       fontSize: 16,
-                      fontWeight: FontWeight.w200))
+                      fontWeight: AppFontWeight.light))
             ],
           ),
         ),
@@ -109,7 +110,7 @@ class LocationScreen extends StatelessWidget {
                             final City city = cities.elementAt(index);
                             return ListTile(
                                 onTap: () => Navigator.of(context).pushNamed(
-                                    RouteNames.main,
+                                    RouteNames.weatherForecast,
                                     arguments: city),
                                 title: SubstringHighlight(
                                     text: city.name,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quang_hung_hai_weather_application/src/constants/routes_name.dart';
+import '../../models/city.dart';
+import '../../constants/routes_name.dart';
 import '../../widgets/day_temp_chart.dart';
 import '../../widgets/refresh_button.dart';
 import '../../blocs/current_weather_bloc/current_weather_bloc.dart';
@@ -18,20 +19,16 @@ import '../../widgets/week_temp_chart.dart';
 import '../../widgets/map.dart';
 
 class WeatherForecastScreen extends StatefulWidget {
-  final String city;
-  final double lon;
-  final double lat;
+  final City city;
 
-  const WeatherForecastScreen(
-      {required this.city, required this.lat, required this.lon, Key? key})
-      : super(key: key);
+  const WeatherForecastScreen({required this.city, Key? key}) : super(key: key);
 
   @override
   State<WeatherForecastScreen> createState() => _WeatherForecastScreenState();
 }
 
 class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
-  final AppTheme _theme = AppTheme();
+  City get _city => widget.city;
   double heightOfLeadingLogoAppBar = 48;
 
   double heightOfActionLogoAppBar = 30;
@@ -65,49 +62,56 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
   @override
   void initState() {
     super.initState();
-    context
-        .read<CurrentWeatherBloc>()
-        .add(CurrentWeatherRequested(lat: widget.lat, lon: widget.lon));
-    context
-        .read<WeekForeCastWeatherBloc>()
-        .add(WeekForeCastWeatherRequested(lat: widget.lat, lon: widget.lon));
+    context.read<CurrentWeatherBloc>().add(CurrentWeatherRequested(
+        lat: _city.coordinate.latitude, lon: _city.coordinate.longitude));
+    context.read<WeekForeCastWeatherBloc>().add(WeekForeCastWeatherRequested(
+        lat: _city.coordinate.latitude, lon: _city.coordinate.longitude));
   }
 
   @override
   Widget build(BuildContext context) {
+    final _theme = Theme.of(context);
     double screenWidth = MediaQuery.of(context).size.width;
-    TextStyle titleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!
-        .copyWith(
-            fontFamily: AppFont.fontHelveticaNeue,
-            fontWeight: AppFontWeight.light,
-            fontSize: 18,
-            color: Colors.white);
+    TextStyle titleAppBarStyle = _theme.textTheme.bodyText2!.copyWith(
+        fontFamily: AppFont.fontHelveticaNeue,
+        fontWeight: AppFontWeight.light,
+        fontSize: 18,
+        color: Colors.white);
 
-    TextStyle titleOfForecast = _theme.lightTheme.textTheme.bodyText2!.copyWith(
+    TextStyle subTitleAppBarStyle = _theme.textTheme.bodyText2!.copyWith(
+        fontFamily: AppFont.fontHelveticaNeue,
+        fontWeight: AppFontWeight.light,
+        fontSize: 18,
+        color: ColorsApp.secondaryTextColor);
+
+    TextStyle titleOfForecast = _theme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
         fontWeight: AppFontWeight.regular,
         fontSize: 18,
         color: Colors.white);
 
-    TextStyle currentTemp = _theme.lightTheme.textTheme.bodyText2!.copyWith(
+    TextStyle monthOfForecast = _theme.textTheme.bodyText2!.copyWith(
+        fontFamily: AppFont.fontHelveticaNeue,
+        fontWeight: AppFontWeight.regular,
+        fontSize: 18,
+        color: ColorsApp.secondaryTextColor);
+
+    TextStyle currentTemp = _theme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
         fontWeight: AppFontWeight.thin,
         fontSize: 100,
         color: Colors.white);
 
-    TextStyle currentCity = _theme.lightTheme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.regular,
-        fontSize: 38,
-        color: Colors.white);
+    TextStyle currentCity = _theme.textTheme.bodyText1!.copyWith(
+        fontWeight: AppFontWeight.regular, fontSize: 38, color: Colors.white);
 
-    TextStyle currentWeather = _theme.lightTheme.textTheme.bodyText2!.copyWith(
+    TextStyle currentWeather = _theme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
         fontWeight: AppFontWeight.regular,
         fontSize: 20,
         color: Colors.white);
 
-    TextStyle dateTime = _theme.lightTheme.textTheme.bodyText2!.copyWith(
+    TextStyle dateTime = _theme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
         fontWeight: AppFontWeight.thin,
         fontSize: 13,
@@ -123,22 +127,17 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
               child: Image.asset(AppAsset.logoCloud)),
         ),
         centerTitle: true,
-        title: InkWell(
-          onTap: () {
-            Navigator.of(context).pushReplacementNamed(RouteNames.location);
-          },
-          child: Column(
-            children: [
-              Text(
-                AppString.weatherForecast,
-                style: titleAppBarStyle,
-              ),
-              Text(
-                widget.city,
-                style: titleAppBarStyle,
-              ),
-            ],
-          ),
+        title: Column(
+          children: [
+            Text(
+              AppString.weatherForecast,
+              style: titleAppBarStyle,
+            ),
+            Text(
+              _city.name,
+              style: subTitleAppBarStyle,
+            ),
+          ],
         ),
         actions: [
           Padding(
@@ -186,7 +185,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                               CustomDateTimeFormat.unixTimeToMonth(
                                       state.currentWeather.dateTime)
                                   .toString(),
-                              style: titleOfForecast,
+                              style: monthOfForecast,
                             ),
                           ],
                         ),
@@ -201,8 +200,8 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                 child: Stack(
                   children: [
                     MapWidget(
-                      lat: widget.lat,
-                      lon: widget.lon,
+                      lat: _city.coordinate.latitude,
+                      lon: _city.coordinate.longitude,
                     ),
                     BlocBuilder<CurrentWeatherBloc, CurrentWeatherState>(
                         builder: (context, state) {
@@ -221,7 +220,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                               style: currentTemp,
                             ),
                             Text(
-                              widget.city,
+                              _city.name,
                               style: currentCity,
                             ),
                             Row(
@@ -303,7 +302,8 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                           child: RefreshButton(onPressed: () {
                             context.read<CurrentWeatherBloc>().add(
                                 CurrentWeatherRequested(
-                                    lat: widget.lat, lon: widget.lon));
+                                    lat: _city.coordinate.latitude,
+                                    lon: _city.coordinate.longitude));
                           }),
                         );
                       }
@@ -326,8 +326,8 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                 child: Stack(
                   children: [
                     MapWidget(
-                      lat: widget.lat,
-                      lon: widget.lon,
+                      lat: _city.coordinate.latitude,
+                      lon: _city.coordinate.longitude,
                     ),
                     BlocBuilder<WeekForeCastWeatherBloc,
                         WeekForeCastWeatherState>(
@@ -393,7 +393,8 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                               onPressed: () {
                                 context.read<WeekForeCastWeatherBloc>().add(
                                     WeekForeCastWeatherRequested(
-                                        lat: widget.lat, lon: widget.lon));
+                                        lat: _city.coordinate.latitude,
+                                        lon: _city.coordinate.longitude));
                               },
                             ),
                           );
