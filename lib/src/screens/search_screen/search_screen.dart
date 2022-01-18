@@ -37,14 +37,14 @@ class _SearchScreenState extends State<SearchScreen>
   @override
   Widget build(BuildContext context) {
     AppTheme _theme = AppTheme();
-    TextStyle titleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!
+    TextStyle _titleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!
         .copyWith(
             fontFamily: AppFont.fontHelveticaNeue,
             fontWeight: AppFontWeight.light,
             fontSize: 20,
             color: Colors.white);
 
-    TextStyle subTitleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!
+    TextStyle _subTitleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!
         .copyWith(
             fontFamily: AppFont.fontHelveticaNeue,
             fontSize: 18,
@@ -58,11 +58,11 @@ class _SearchScreenState extends State<SearchScreen>
             children: [
               Text(
                 AppString.location,
-                style: titleAppBarStyle,
+                style: _titleAppBarStyle,
               ),
               Text(
                 widget.cityName,
-                style: subTitleAppBarStyle,
+                style: _subTitleAppBarStyle,
               ),
             ],
           ),
