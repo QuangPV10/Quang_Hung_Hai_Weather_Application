@@ -1,21 +1,16 @@
 import 'package:http/http.dart' as http;
 
 class HttpClient {
-  final String? baseUrl;
+  final String?baseUrl;
   final String? apiKey;
   HttpClient({this.baseUrl, this.apiKey});
   Future<String> getData(String path, {Map<String, dynamic>? params}) async {
-    final baseParam = <String, dynamic>{
-    };
-    baseParam.putIfAbsent('appid', () => apiKey);
-
-    if (params != null) {
-      baseParam.addAll(params);
-    }
+    params!.putIfAbsent('appid', () => apiKey);
     final uri = Uri(
       scheme: 'https',
       host: baseUrl,
       path: path,
+      queryParameters: params
     );
     final getData = await http.get(uri);
     if (getData.statusCode == 200) {

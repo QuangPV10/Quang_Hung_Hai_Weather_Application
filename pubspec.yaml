@@ -47,7 +47,6 @@ flutter:
   assets:
     - assets/images/
     - assets/data/
-    - assets/config/env/
     - assets/cfg/
     - assets/translations/
 
