@@ -6,7 +6,7 @@ import '../../constants/app_assets.dart';
 import '../../models/city.dart';
 import './search_service.dart';
 
-class SearchImpl extends SearchService {
+class SearchServiceImpl extends SearchService {
   @override
   Future<List<City>> fetchAllCity() async {
     final jsonData = await rootBundle.loadString(AppAsset.data);
