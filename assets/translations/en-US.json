@@ -1,0 +1,19 @@
+{
+  "appConstants": {
+    "degrees": "°",
+    "loadFailureText": "Cannot access data",
+    "tryAgain": "Try again"
+  },
+  "mainScreen": {
+  },
+  "weatherForecastScreen": {
+    "weatherForecast": "Weather Forecast",
+    "dayForecast": "Day Forecast"
+  },
+  "searchScreen": {
+    "location": "Location",
+    "done": "Done",
+    "hintText": "Input City Name"
+  }
+
+}

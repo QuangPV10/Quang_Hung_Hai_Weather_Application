@@ -1,4 +1,5 @@
 import 'package:after_layout/after_layout.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:substring_highlight/substring_highlight.dart';
@@ -7,7 +8,6 @@ import '../../blocs/search_bloc/search_bloc.dart';
 import '../../blocs/search_bloc/search_event.dart';
 import '../../blocs/search_bloc/search_state.dart';
 import '../../constants/app_colors.dart';
-import '../../constants/app_string.dart';
 import '../../constants/app_theme.dart';
 import '../../injection_container.dart';
 import '../../models/city.dart';
@@ -57,7 +57,7 @@ class _SearchScreenState extends State<SearchScreen>
           title: Column(
             children: [
               Text(
-                AppString.location,
+                tr('searchScreen.location'),
                 style: _titleAppBarStyle,
               ),
               Text(
@@ -67,7 +67,7 @@ class _SearchScreenState extends State<SearchScreen>
             ],
           ),
           widgetLeading: TextButton(
-            child: Text(AppString.done,
+            child: Text(tr('searchScreen.done'),
                 style: _theme.lightTheme.textTheme.bodyText2!.copyWith(
                     fontSize: 17,
                     fontWeight: FontWeight.w400,
@@ -85,7 +85,7 @@ class _SearchScreenState extends State<SearchScreen>
                   reload: () {
                     context.read<SearchBloc>().add(SearchRequested());
                   },
-                  title: AppString.loadFailureText);
+                  title: tr('appConstants.loadFailureText'));
             } else if (state is SearchLoadSuccess) {
               return Container(
                 color: ColorsApp.searchFieldColor,
@@ -98,16 +98,18 @@ class _SearchScreenState extends State<SearchScreen>
                         cursorColor: ColorsApp.cursorColor,
                         autofocus: true,
                         decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.search,
-                                color: ColorsApp.searchIconColor),
-                            suffixIcon: IconButton(
-                                onPressed: () =>
-                                    _fieldTextEditingController.clear(),
-                                icon: const Icon(Icons.close,
-                                    color: ColorsApp.searchFieldIconColor)),
-                            border: const OutlineInputBorder(
-                                borderSide: BorderSide.none),
-                            hintText: AppString.hintText),
+                          prefixIcon: const Icon(Icons.search,
+                              color: ColorsApp.searchIconColor),
+                          suffixIcon: IconButton(
+                            onPressed: () =>
+                                _fieldTextEditingController.clear(),
+                            icon: const Icon(Icons.close,
+                                color: ColorsApp.searchFieldIconColor),
+                          ),
+                          border: const OutlineInputBorder(
+                              borderSide: BorderSide.none),
+                          hintText: tr('searchScreen.hintText'),
+                        ),
                         controller: _fieldTextEditingController,
                         focusNode: focusNode,
                         style: Theme.of(context).textTheme.subtitle1!.copyWith(

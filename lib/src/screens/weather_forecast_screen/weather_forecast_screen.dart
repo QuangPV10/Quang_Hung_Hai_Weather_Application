@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quang_hung_hai_weather_application/src/widgets/custom_app_bar.dart';
@@ -14,7 +15,6 @@ import '../../blocs/week_forecast_weather_bloc/week_forecast_weather_event.dart'
 import '../../blocs/week_forecast_weather_bloc/week_forecast_weather_state.dart';
 import '../../constants/app_assets.dart';
 import '../../constants/app_colors.dart';
-import '../../constants/app_string.dart';
 import '../../constants/app_theme.dart';
 import '../../helper/day_format.dart';
 import '../../widgets/week_temp_chart.dart';
@@ -136,7 +136,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
         ),
         title: Column(
           children: [
-             Text(AppString.weatherForecast,style: _titleAppBarStyle),
+             Text(tr('weatherForecastScreen.weatherForecast'),style: _titleAppBarStyle),
              Text(_city.name,style: _subTitleAppBarStyle,),
           ],
         ),
@@ -168,7 +168,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              AppString.dayForecast,
+                              tr('weatherForecastScreen.dayForecast'),
                               style: _titleOfForecast,
                             ),
                             Row(
@@ -218,7 +218,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '${state.currentWeather.temp.toInt()}${AppString.degrees}',
+                                  '${state.currentWeather.temp.toInt()}${tr('appConstants.degrees')}',
                                   style: _currentTemp,
                                 ),
                                 Text(
@@ -311,7 +311,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                                           lat: _city.latitude,
                                           lon: _city.longitude));
                                 },
-                                title: AppString.loadFailureText,
+                                title: tr('appConstants.loadFailureText'),
                               ),
                             );
                           }
@@ -325,7 +325,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                     horizontal: _paddingHorizontalOfTitle,
                     vertical: _paddingVerticalOfTitle),
                 child: Text(
-                  AppString.weatherForecast,
+                  tr('weatherForecastScreen.weatherForecast'),
                   style: _titleOfForecast,
                 ),
               ),
@@ -405,7 +405,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                                         lat: _city.latitude,
                                         lon: _city.longitude));
                               },
-                              title: AppString.loadFailureText,
+                              title:  tr('appConstants.loadFailureText'),
                             ),
                           );
                         }

@@ -19,8 +19,10 @@ dependencies:
   cached_network_image: ^3.2.0
   easy_debounce: ^2.0.2+1
   equatable: ^2.0.3
+  easy_localization: ^3.0.0
   flutter_simple_dependency_injection: ^2.0.0
   flutter_bloc: ^8.0.1
+  global_configuration: ^2.0.0-nullsafety.1
   http: ^0.13.4
   map:
   latlng:
@@ -46,6 +48,8 @@ flutter:
     - assets/images/
     - assets/data/
     - assets/config/env/
+    - assets/cfg/
+    - assets/translations/
 
   fonts:
     - family: Helvetica Neue

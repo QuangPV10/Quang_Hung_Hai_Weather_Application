@@ -1,4 +1,5 @@
 import 'package:after_layout/after_layout.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quang_hung_hai_weather_application/src/injection_container.dart';
@@ -9,7 +10,6 @@ import '../../blocs/current_weather_bloc/current_weather_event.dart';
 import '../../blocs/current_weather_bloc/current_weather_state.dart';
 import '../../constants/app_assets.dart';
 import '../../constants/app_colors.dart';
-import '../../constants/app_string.dart';
 import '../../constants/app_theme.dart';
 import '../../constants/routes_name.dart';
 import '../../helper/day_format.dart';
@@ -121,7 +121,7 @@ class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
                               style: _subTitleAppBarStyle),
                           const SizedBox(width: 5),
                           Text(
-                              '${state.currentWeather.temp.toInt().toString()}${AppString.degrees}',
+                              '${state.currentWeather.temp.toInt().toString()}${tr('appConstants.degrees')}',
                               style: _subTitleAppBarStyle),
                         ],
                       )

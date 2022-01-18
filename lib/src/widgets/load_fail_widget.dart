@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/app_string.dart';
 
 class LoadFailWidget extends StatelessWidget {
   final String title;
@@ -29,7 +29,7 @@ class LoadFailWidget extends StatelessWidget {
               onPressed: () async {
                 reload();
               },
-              child: const Text(AppString.tryAgain))
+              child:  Text(tr('appConstants.tryAgain')))
         ],
       ),
     );

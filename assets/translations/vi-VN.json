@@ -1,0 +1,19 @@
+{
+  "appConstants": {
+    "degrees": "°",
+    "loadFailureText": "Không thể load dữ liệu",
+    "tryAgain": "Thử lại"
+  },
+  "mainScreen": {
+  },
+  "weatherForecastScreen": {
+    "weatherForecast": "Dự báo thời tiết",
+    "dayForecast": "Dự báo trong ngày"
+  },
+  "searchScreen": {
+    "location": "Vị trí",
+    "done": "Xong",
+    "hintText": "Nhập tên thành phố"
+  }
+
+}
