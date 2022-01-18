@@ -1,7 +1,7 @@
 import '../../models/city.dart';
 
-abstract class LocationService {
-  LocationService();
+abstract class SearchService {
+  SearchService();
 
   Future<List<City>>? fetchAllCity();
 }

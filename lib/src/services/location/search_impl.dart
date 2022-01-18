@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 
 import '../../constants/app_assets.dart';
 import '../../models/city.dart';
-import './location_service.dart';
+import './search_service.dart';
 
-class LocationImpl extends LocationService {
+class SearchImpl extends SearchService {
   @override
   Future<List<City>> fetchAllCity() async {
     final jsonData = await rootBundle.loadString(AppAsset.data);

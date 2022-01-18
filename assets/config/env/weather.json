@@ -1,6 +1,6 @@
 {
   "ENV": "weather",
-  "HOST_NAME": "https://api.openweathermap.org/data",
+  "HOST_NAME": "api.openweathermap.org/data",
   "VERSION_2.5": "/2.5",
   "KEY": "&appid=2a99675cf54960573fefa4a06f7030c6",
   "ONE_CALL_PATH": "/onecall",

@@ -1,13 +1,14 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quang_hung_hai_weather_application/src/blocs/search_bloc/search_bloc.dart';
+import 'package:quang_hung_hai_weather_application/src/blocs/search_bloc/search_event.dart';
+import 'package:quang_hung_hai_weather_application/src/blocs/search_bloc/search_state.dart';
+import 'package:quang_hung_hai_weather_application/src/constants/app_theme.dart';
 import 'package:quang_hung_hai_weather_application/src/injection_container.dart';
 import 'package:quang_hung_hai_weather_application/src/widgets/custom_app_bar.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
-import '../../blocs/location/location_bloc.dart';
-import '../../blocs/location/location_event.dart';
-import '../../blocs/location/location_state.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_string.dart';
 import '../../models/city.dart';
@@ -26,45 +27,66 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen>
     with AfterLayoutMixin<LocationScreen> {
-  final _locationBloc = AppDependencies.injector.get<LocationBloc>();
+  final _locationBloc = AppDependencies.injector.get<SearchBloc>();
 
   @override
   void afterFirstLayout(BuildContext context) {
-    AppDependencies.injector.get<LocationBloc>().add(LocationRequested());
+    AppDependencies.injector.get<SearchBloc>().add(SearchRequested());
   }
 
   @override
   Widget build(BuildContext context) {
-    final _theme = Theme.of(context);
+    AppTheme _theme = AppTheme();
+    TextStyle titleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!
+        .copyWith(
+            fontFamily: AppFont.fontHelveticaNeue,
+            fontWeight: AppFontWeight.light,
+            fontSize: 20,
+            color: Colors.white);
 
+    TextStyle subTitleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!
+        .copyWith(
+            fontFamily: AppFont.fontHelveticaNeue,
+            fontSize: 18,
+            color: ColorsApp.secondaryTextColor);
     TextEditingController _fieldTextEditingController = TextEditingController();
 
     return Scaffold(
         backgroundColor: ColorsApp.primaryBackgroundColor,
         appBar: CustomAppBar(
-          subtitle: widget.cityName,
-          title: AppString.location,
+          title: Column(
+            children: [
+              Text(
+                AppString.location,
+                style: titleAppBarStyle,
+              ),
+              Text(
+                widget.cityName,
+                style: subTitleAppBarStyle,
+              ),
+            ],
+          ),
           widgetLeading: TextButton(
             child: Text(AppString.done,
-                style: _theme.textTheme.bodyText2!.copyWith(
+                style: _theme.lightTheme.textTheme.bodyText2!.copyWith(
                     fontSize: 17,
                     fontWeight: FontWeight.w400,
                     color: ColorsApp.leadingTextColor)),
             onPressed: () => Navigator.of(context).maybePop(),
           ),
         ),
-        body: BlocBuilder<LocationBloc, LocationState>(
+        body: BlocBuilder<SearchBloc, SearchState>(
           bloc: _locationBloc,
           builder: (context, state) {
-            if (state is LocationLoadInProgress) {
+            if (state is SearchLoadInProgress) {
               return const Center(child: CircularProgressIndicator());
-            } else if (state is LocationLoadFailure) {
+            } else if (state is SearchLoadFailure) {
               return LoadFailWidget(
                   reload: () {
-                    context.read<LocationBloc>().add(LocationRequested());
+                    context.read<SearchBloc>().add(SearchRequested());
                   },
                   title: AppString.loadFailureText);
-            } else if (state is LocationLoadSuccess) {
+            } else if (state is SearchLoadSuccess) {
               return Container(
                 color: ColorsApp.searchFieldColor,
                 child: Autocomplete<City>(
@@ -97,9 +119,12 @@ class _LocationScreenState extends State<LocationScreen>
                     }
                     return state.cities.where((City city) {
                       return city.name
-                          .toString()
-                          .toLowerCase()
-                          .contains(textEditingValue.text.toLowerCase());
+                              .toString()
+                              .toLowerCase()
+                              .contains(textEditingValue.text.toLowerCase()) ||
+                          city.longitude
+                              .toString()
+                              .contains(textEditingValue.text);
                     });
                   },
                   optionsViewBuilder: (context, onSelected, cities) {
@@ -117,7 +142,8 @@ class _LocationScreenState extends State<LocationScreen>
                                 title: SubstringHighlight(
                                     text: city.name,
                                     term: _fieldTextEditingController.text,
-                                    textStyle: _theme.textTheme.headline6!
+                                    textStyle: _theme
+                                        .lightTheme.textTheme.headline6!
                                         .copyWith(color: Colors.grey),
                                     textStyleHighlight: const TextStyle(
                                         fontWeight: FontWeight.w900,

@@ -25,51 +25,61 @@ class AppTheme {
     primaryColor: ColorsApp.backgroundBottomColor,
     textTheme: const TextTheme(
       headline1: TextStyle(
+        fontFamily: AppFont.fontHelveticaNeue,
         fontSize: 28,
         fontWeight: AppFontWeight.bold,
         color: Colors.black,
       ),
       headline2: TextStyle(
+        fontFamily: AppFont.fontHelveticaNeue,
         fontSize: 25,
         fontWeight: AppFontWeight.bold,
         color: Colors.black,
       ),
       headline3: TextStyle(
+        fontFamily: AppFont.fontHelveticaNeue,
         fontSize: 22,
         fontWeight: AppFontWeight.bold,
         color: Colors.black,
       ),
       headline4: TextStyle(
+        fontFamily: AppFont.fontHelveticaNeue,
         fontSize: 20,
         fontWeight: AppFontWeight.bold,
         color: Colors.black,
       ),
       headline5: TextStyle(
+        fontFamily: AppFont.fontHelveticaNeue,
         fontSize: 18,
         fontWeight: AppFontWeight.bold,
         color: Colors.black,
       ),
       headline6: TextStyle(
+        fontFamily: AppFont.fontHelveticaNeue,
         fontSize: 16,
         fontWeight: AppFontWeight.bold,
         color: Colors.black,
       ),
       bodyText1: TextStyle(
-        fontSize: 15,
-        fontWeight: AppFontWeight.medium,
-        color: Colors.black,
-      ),
-      bodyText2: TextStyle(
+        fontFamily: AppFont.fontHelveticaNeue,
         fontSize: 15,
         fontWeight: AppFontWeight.regular,
         color: Colors.black,
       ),
+      bodyText2: TextStyle(
+        fontFamily: AppFont.fontHelveticaNeue,
+        fontSize: 15,
+        fontWeight: AppFontWeight.light,
+        color: Colors.black,
+      ),
       subtitle1: TextStyle(
+        fontFamily: AppFont.fontHelveticaNeue,
         fontSize: 14,
         fontWeight: AppFontWeight.regular,
         color: Colors.black,
       ),
       subtitle2: TextStyle(
+        fontFamily: AppFont.fontHelveticaNeue,
         fontSize: 13,
         fontWeight: AppFontWeight.regular,
         color: Colors.black,

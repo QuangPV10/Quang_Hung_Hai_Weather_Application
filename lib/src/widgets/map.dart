@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:map/map.dart';
 import 'package:latlng/latlng.dart';
@@ -23,14 +24,17 @@ class MapWidget extends StatelessWidget {
       builder: (BuildContext context, int x, int y, int z) {
         return Stack(
           children: [
-            Image.network(
-              '${MapImage(z: z, x: x, y: y).map}',
+            CachedNetworkImage(
+              imageUrl:MapImage(z: z, x: x, y: y).map,
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
               fit: BoxFit.cover,
               color: mapColor,
               colorBlendMode: BlendMode.hardLight,
             ),
-            Image.network(
-              '${WeatherImage(z: z, x: x, y: y).map}',
+            CachedNetworkImage(
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              imageUrl:WeatherImage(z: z, x: x, y: y).map,
               fit: BoxFit.cover,
             ),
           ],

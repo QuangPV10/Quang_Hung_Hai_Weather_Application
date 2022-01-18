@@ -1,4 +1,0 @@
-{
-    "ENV": "production",
-    "HOST_NAME": "api.openweathermap.org"
-}

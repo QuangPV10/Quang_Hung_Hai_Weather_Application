@@ -1,6 +1,8 @@
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quang_hung_hai_weather_application/src/injection_container.dart';
+import 'package:quang_hung_hai_weather_application/src/widgets/custom_app_bar.dart';
 
 import '../../blocs/current_weather_bloc/current_weather_bloc.dart';
 import '../../blocs/current_weather_bloc/current_weather_event.dart';
@@ -22,91 +24,65 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
-  final  _currentWeatherBloc = AppDependencies.injector.get<CurrentWeatherBloc>();
-  City defaultCity =
+class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
+  final _currentWeatherBloc =
+      AppDependencies.injector.get<CurrentWeatherBloc>();
+  City _defaultCity =
       const City(name: "Hồ Chí Minh", longitude: 106.6667, latitude: 10.75);
-  double heightOfLeadingLogoAppBar = 48;
+  final double _heightOfLeadingLogoAppBar = 48.0;
 
-  double heightOfActionLogoAppBar = 30;
+  final double _widthOfLeadingLogoAppBar = 50.0;
 
-  double heightOfMapDayForecast = 500;
+  final double _paddingHorizontalOfTitle = 28.0;
 
-  double heightOfMapWeekForecast = 150;
+  final Color _colorOfChart = ColorsApp.chartColor.withOpacity(0.8);
 
-  double heightOfChart = 80;
-
-  double widthOfLeadingLogoAppBar = 50;
-
-  double widthOfActionLogoAppBar = 30;
-
-  double paddingHorizontalOfTitle = 28;
-
-  double paddingVerticalOfTitle = 20;
-
-  double paddingOfDayAndMonth = 10;
-
-  double paddingChartWithListView = 100;
-
-  double paddingTopOfWeekForecast = 20;
-
-  double paddingBottomCity = 30;
-
-  Color backgroundColor = ColorsApp.backgroundColor;
-
-  Color colorOfChart = ColorsApp.chartColor.withOpacity(0.8);
   @override
-  void initState() {
-    super.initState();
+  void afterFirstLayout(BuildContext context) {
     AppDependencies.injector.get<CurrentWeatherBloc>().add(
           CurrentWeatherRequested(
-              lat: defaultCity.latitude, lon: defaultCity.longitude),
+              lat: _defaultCity.latitude, lon: _defaultCity.longitude),
         );
   }
 
   @override
   Widget build(BuildContext context) {
-
     const double _heightOfColumn = 150;
     const double _heightOfChart = 50;
 
-    final _theme = Theme.of(context);
+    final AppTheme _theme = AppTheme();
     double screenWidth = MediaQuery.of(context).size.width;
-    TextStyle titleAppBarStyle = _theme.textTheme.bodyText2!.copyWith(
+    TextStyle _titleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
         fontWeight: AppFontWeight.light,
         fontSize: 18,
         color: Colors.white);
 
-    TextStyle subTitleAppBarStyle = _theme.textTheme.bodyText2!.copyWith(
+    TextStyle _subTitleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
         fontWeight: AppFontWeight.light,
         fontSize: 18,
         color: ColorsApp.secondaryTextColor);
 
-    TextStyle dateTime = _theme.textTheme.bodyText2!.copyWith(
+    TextStyle _dateTime = _theme.lightTheme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
         fontWeight: AppFontWeight.bold,
         fontSize: 13,
         color: Colors.white.withOpacity(1));
     return Scaffold(
-      appBar:
-
-      AppBar(
-        backgroundColor: ColorsApp.primaryBackgroundColor,
-        leading: Padding(
-          padding: EdgeInsets.only(left: paddingHorizontalOfTitle),
+      appBar: CustomAppBar(
+        widgetLeading: Padding(
+          padding: EdgeInsets.only(left: _paddingHorizontalOfTitle),
           child: SizedBox(
-              height: heightOfLeadingLogoAppBar,
-              width: widthOfLeadingLogoAppBar,
+              height: _heightOfLeadingLogoAppBar,
+              width: _widthOfLeadingLogoAppBar,
               child: InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, RouteNames.weatherForecast,
-                        arguments: defaultCity);
+                        arguments: _defaultCity);
                   },
                   child: Image.asset(AppAsset.logoCloud))),
         ),
-        toolbarHeight: 50,
         title: Center(
           child: BlocBuilder(
             bloc: _currentWeatherBloc,
@@ -118,35 +94,35 @@ class _MainScreenState extends State<MainScreen> {
                 return GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, RouteNames.location,
-                            arguments: defaultCity.name)
+                            arguments: _defaultCity.name)
                         .then((result) {
                       if (result != null) {
                         City city = result as City;
                         setState(() {
-                          defaultCity = city;
+                          _defaultCity = city;
                         });
                         AppDependencies.injector.get<CurrentWeatherBloc>().add(
-                          CurrentWeatherRequested(
-                              lat: city.latitude, lon: city.longitude),
-                        );
+                              CurrentWeatherRequested(
+                                  lat: city.latitude, lon: city.longitude),
+                            );
                       }
                     });
                   },
                   child: Column(
                     children: [
                       Text(
-                        defaultCity.name,
-                        style: titleAppBarStyle,
+                        _defaultCity.name,
+                        style: _titleAppBarStyle,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(state.currentWeather.weatherStatus.weather,
-                              style: subTitleAppBarStyle),
+                              style: _subTitleAppBarStyle),
                           const SizedBox(width: 5),
                           Text(
                               '${state.currentWeather.temp.toInt().toString()}${AppString.degrees}',
-                              style: subTitleAppBarStyle),
+                              style: _subTitleAppBarStyle),
                         ],
                       )
                     ],
@@ -165,11 +141,11 @@ class _MainScreenState extends State<MainScreen> {
             },
           ),
         ),
-        actions: [
+        actionWidget: [
           IconButton(
               onPressed: () {
                 Navigator.pushNamed(context, RouteNames.weatherForecast,
-                    arguments: defaultCity);
+                    arguments: _defaultCity);
               },
               icon: Image.asset(AppAsset.logoSetting)),
         ],
@@ -184,7 +160,7 @@ class _MainScreenState extends State<MainScreen> {
             return Stack(
               children: [
                 MapWidget(
-                    lat: defaultCity.latitude, lon: defaultCity.longitude),
+                    lat: _defaultCity.latitude, lon: _defaultCity.longitude),
                 SizedBox(
                   height: _heightOfColumn,
                   child: Column(
@@ -204,7 +180,7 @@ class _MainScreenState extends State<MainScreen> {
                                       .currentWeather
                                       .weatherHourlyAlerts[index]
                                       .datetime),
-                                  style: dateTime,
+                                  style: _dateTime,
                                 ),
                               ],
                             );
@@ -228,7 +204,7 @@ class _MainScreenState extends State<MainScreen> {
                           weatherTempAlert:
                               state.currentWeather.weatherHourlyAlerts,
                           weather: state.currentWeather,
-                          color: colorOfChart,
+                          color: _colorOfChart,
                         ),
                       ),
                     ],

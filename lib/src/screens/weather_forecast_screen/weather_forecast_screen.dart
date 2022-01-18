@@ -35,7 +35,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
       AppDependencies.injector.get<CurrentWeatherBloc>();
   final _weekWeatherBloc =
       AppDependencies.injector.get<WeekForeCastWeatherBloc>();
-  final double _heightOfLeadingLogoAppBar = 48.0;
+  final double _heightOfLeadingLogoAppBar = 50.0;
 
   final double _heightOfActionLogoAppBar = 30.0;
 
@@ -79,40 +79,52 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _theme = Theme.of(context);
+    AppTheme _theme = AppTheme();
     double screenWidth = MediaQuery.of(context).size.width;
-    TextStyle titleOfForecast = _theme.textTheme.bodyText2!.copyWith(
+    TextStyle _titleOfForecast = _theme.lightTheme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.regular,
         fontSize: 18,
         color: Colors.white);
 
-    TextStyle monthOfForecast = _theme.textTheme.bodyText2!.copyWith(
+    TextStyle _monthOfForecast = _theme.lightTheme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
         fontWeight: AppFontWeight.regular,
         fontSize: 18,
         color: ColorsApp.secondaryTextColor);
 
-    TextStyle currentTemp = _theme.textTheme.bodyText2!.copyWith(
+    TextStyle _currentTemp = _theme.lightTheme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
         fontWeight: AppFontWeight.thin,
         fontSize: 100,
         color: Colors.white);
 
-    TextStyle currentCity = _theme.textTheme.bodyText1!.copyWith(
+    TextStyle _currentCity = _theme.lightTheme.textTheme.bodyText1!.copyWith(
         fontWeight: AppFontWeight.regular, fontSize: 38, color: Colors.white);
 
-    TextStyle currentWeather = _theme.textTheme.bodyText2!.copyWith(
+    TextStyle _currentWeather = _theme.lightTheme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
         fontWeight: AppFontWeight.regular,
         fontSize: 20,
         color: Colors.white);
 
-    TextStyle dateTime = _theme.textTheme.bodyText2!.copyWith(
+    TextStyle _dateTime = _theme.lightTheme.textTheme.bodyText2!.copyWith(
         fontFamily: AppFont.fontHelveticaNeue,
         fontWeight: AppFontWeight.thin,
         fontSize: 13,
         color: Colors.white.withOpacity(1));
+
+    TextStyle _titleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!.copyWith(
+        fontFamily: AppFont.fontHelveticaNeue,
+        fontWeight: AppFontWeight.light,
+        fontSize: 20,
+        color: Colors.white);
+
+    TextStyle _subTitleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!.copyWith(
+        fontFamily: AppFont.fontHelveticaNeue,
+        fontWeight: AppFontWeight.light,
+        fontSize: 18,
+        color: ColorsApp.secondaryTextColor);
+
     return Scaffold(
       appBar: CustomAppBar(
         widgetLeading: Padding(
@@ -122,8 +134,12 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
               width: _widthOfLeadingLogoAppBar,
               child: Image.asset(AppAsset.logoCloud)),
         ),
-        title: AppString.weatherForecast,
-        subtitle: _city.name,
+        title: Column(
+          children: [
+             Text(AppString.weatherForecast,style: _titleAppBarStyle),
+             Text(_city.name,style: _subTitleAppBarStyle,),
+          ],
+        ),
         actionWidget: [
           Padding(
               padding: EdgeInsets.only(right: _paddingHorizontalOfTitle),
@@ -153,7 +169,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                           children: [
                             Text(
                               AppString.dayForecast,
-                              style: titleOfForecast,
+                              style: _titleOfForecast,
                             ),
                             Row(
                               children: [
@@ -161,7 +177,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                                   CustomDateTimeFormat.unixTimeToDay(
                                           state.currentWeather.dateTime)
                                       .toString(),
-                                  style: titleOfForecast,
+                                  style: _titleOfForecast,
                                 ),
                                 SizedBox(
                                   width: _paddingOfDayAndMonth,
@@ -170,7 +186,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                                   CustomDateTimeFormat.unixTimeToMonth(
                                           state.currentWeather.dateTime)
                                       .toString(),
-                                  style: monthOfForecast,
+                                  style: _monthOfForecast,
                                 ),
                               ],
                             ),
@@ -203,11 +219,11 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                               children: [
                                 Text(
                                   '${state.currentWeather.temp.toInt()}${AppString.degrees}',
-                                  style: currentTemp,
+                                  style: _currentTemp,
                                 ),
                                 Text(
                                   _city.name,
-                                  style: currentCity,
+                                  style: _currentCity,
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -215,7 +231,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                                     Text(
                                       state
                                           .currentWeather.weatherStatus.weather,
-                                      style: currentWeather,
+                                      style: _currentWeather,
                                     ),
                                     Image.network(WeatherIcon(
                                             iconID: state.currentWeather
@@ -242,7 +258,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                                                     .currentWeather
                                                     .weatherHourlyAlerts[index]
                                                     .datetime),
-                                            style: dateTime,
+                                            style: _dateTime,
                                           ),
                                           Container(
                                               height: _paddingBottomCity,
@@ -310,7 +326,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                     vertical: _paddingVerticalOfTitle),
                 child: Text(
                   AppString.weatherForecast,
-                  style: titleOfForecast,
+                  style: _titleOfForecast,
                 ),
               ),
               SizedBox(
@@ -349,7 +365,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                                                         .dateTime
                                                         .toInt())
                                                 .toUpperCase(),
-                                            style: dateTime,
+                                            style: _dateTime,
                                           ),
                                           Image.network(WeatherIcon(
                                                   iconID: state

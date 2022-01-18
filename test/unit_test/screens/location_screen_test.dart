@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:quang_hung_hai_weather_application/src/blocs/location/location_bloc.dart';
-import 'package:quang_hung_hai_weather_application/src/blocs/location/location_state.dart';
+import 'package:quang_hung_hai_weather_application/src/blocs/search_bloc/search_bloc.dart';
+import 'package:quang_hung_hai_weather_application/src/blocs/search_bloc/search_state.dart';
+
+
 import 'package:quang_hung_hai_weather_application/src/models/city.dart';
 import 'package:quang_hung_hai_weather_application/src/routes/route_controller.dart';
-import 'package:quang_hung_hai_weather_application/src/screens/location_screen/location_screen.dart';
+import 'package:quang_hung_hai_weather_application/src/screens/location_screen/search_screen.dart';
 import 'package:quang_hung_hai_weather_application/src/widgets/load_fail_widget.dart';
 
 import '../../common/common_mock.dart';
@@ -24,7 +26,7 @@ void main() {
     registerFallbackValue(RouteFake());
   });
 
-  late LocationBloc locationBloc;
+  late SearchBloc locationBloc;
 
   var widget = BlocProvider(
     create: (context) => locationBloc,
@@ -52,7 +54,7 @@ void main() {
 
   testWidgets('Display Appbar', (WidgetTester tester) async {
     when(() => locationBloc.state)
-        .thenReturn(LocationLoadSuccess(cities: _cities));
+        .thenReturn(SearchLoadSuccess(cities: _cities));
     await tester.pumpWidget(widget);
     final appbarFinder = find.byType(AppBar);
     expect(appbarFinder, findsOneWidget);
@@ -60,7 +62,7 @@ void main() {
 
   testWidgets('Navigator pop to WeatherForecastScreen', (tester) async {
     when(() => locationBloc.state)
-        .thenReturn(LocationLoadSuccess(cities: _cities));
+        .thenReturn(SearchLoadSuccess(cities: _cities));
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
     final iconButtonFinder = find.byType(TextButton).first;
@@ -73,7 +75,7 @@ void main() {
   testWidgets(
       'Should render orange container when crypto bloc state is [LocaitonInitial]',
       (tester) async {
-    when(() => locationBloc.state).thenReturn(LocationInitial());
+    when(() => locationBloc.state).thenReturn(SearchInitial());
     await tester.pumpWidget(widget);
     await tester.pump();
 
@@ -86,7 +88,7 @@ void main() {
   testWidgets('Should clear text in TextField when tap on x button',
       (tester) async {
     when(() => locationBloc.state)
-        .thenReturn(LocationLoadSuccess(cities: _cities));
+        .thenReturn(SearchLoadSuccess(cities: _cities));
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(Container).first);
@@ -101,10 +103,10 @@ void main() {
     expect(textFinder, findsNothing);
   });
 
-  testWidgets('Should search city when bloc state is [LocationLoadSuccess]',
+  testWidgets('Should search_bloc city when bloc state is [LocationLoadSuccess]',
       (tester) async {
     when(() => locationBloc.state)
-        .thenReturn(LocationLoadSuccess(cities: _cities));
+        .thenReturn(SearchLoadSuccess(cities: _cities));
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(Container).first);
@@ -119,9 +121,9 @@ void main() {
   });
 
   testWidgets(
-      'Should render LoadFailure widget when search bloc state is [LocationLoadFailure]',
+      'Should render LoadFailure widget when search_bloc bloc state is [LocationLoadFailure]',
       (tester) async {
-    when(() => locationBloc.state).thenReturn(LocationLoadFailure());
+    when(() => locationBloc.state).thenReturn(SearchLoadFailure());
     await tester.pumpWidget(widget);
     await tester.pump();
     final errorMessageFinder = find.byType(LoadFailWidget);
@@ -131,7 +133,7 @@ void main() {
   testWidgets(
       'Should reload when tap on TextButton when bloc state is [LocationLoadFailure]',
       (tester) async {
-    when(() => locationBloc.state).thenReturn(LocationLoadFailure());
+    when(() => locationBloc.state).thenReturn(SearchLoadFailure());
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(LoadFailWidget));

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants/routes_name.dart';
 import '../models/city.dart';
-import '../screens/location_screen/location_screen.dart';
+import '../screens/location_screen/search_screen.dart';
 import '../screens/main_screen/main_screen.dart';
 import '../screens/not_found_screen/not_found_screen.dart';
 import '../screens/weather_forecast_screen/weather_forecast_screen.dart';
