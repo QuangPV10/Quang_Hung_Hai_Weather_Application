@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quang_hung_hai_weather_application/src/injection_container.dart';
 
 import '../../blocs/current_weather_bloc/current_weather_bloc.dart';
 import '../../blocs/current_weather_bloc/current_weather_event.dart';
@@ -22,6 +23,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final  _currentWeatherBloc = AppDependencies.injector.get<CurrentWeatherBloc>();
   City defaultCity =
       const City(name: "Hồ Chí Minh", longitude: 106.6667, latitude: 10.75);
   double heightOfLeadingLogoAppBar = 48;
@@ -56,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<CurrentWeatherBloc>().add(
+    AppDependencies.injector.get<CurrentWeatherBloc>().add(
           CurrentWeatherRequested(
               lat: defaultCity.latitude, lon: defaultCity.longitude),
         );
@@ -88,8 +90,8 @@ class _MainScreenState extends State<MainScreen> {
         fontSize: 13,
         color: Colors.white.withOpacity(1));
     return Scaffold(
-      appBar: 
-      
+      appBar:
+
       AppBar(
         backgroundColor: ColorsApp.primaryBackgroundColor,
         leading: Padding(
@@ -106,7 +108,8 @@ class _MainScreenState extends State<MainScreen> {
         ),
         toolbarHeight: 50,
         title: Center(
-          child: BlocBuilder<CurrentWeatherBloc, CurrentWeatherState>(
+          child: BlocBuilder(
+            bloc: _currentWeatherBloc,
             builder: (context, state) {
               if (state is CurrentWeatherLoadInProgress) {
                 return const Center(child: CircularProgressIndicator());
@@ -122,9 +125,10 @@ class _MainScreenState extends State<MainScreen> {
                         setState(() {
                           defaultCity = city;
                         });
-                        context.read<CurrentWeatherBloc>().add(
-                            CurrentWeatherRequested(
-                                lon: city.longitude, lat: city.latitude));
+                        AppDependencies.injector.get<CurrentWeatherBloc>().add(
+                          CurrentWeatherRequested(
+                              lat: city.latitude, lon: city.longitude),
+                        );
                       }
                     });
                   },
@@ -170,7 +174,8 @@ class _MainScreenState extends State<MainScreen> {
               icon: Image.asset(AppAsset.logoSetting)),
         ],
       ),
-      body: BlocBuilder<CurrentWeatherBloc, CurrentWeatherState>(
+      body: BlocBuilder(
+        bloc: _currentWeatherBloc,
         builder: (context, state) {
           if (state is CurrentWeatherLoadInProgress) {
             return const Center(child: CircularProgressIndicator());

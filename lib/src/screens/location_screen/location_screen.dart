@@ -1,5 +1,7 @@
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quang_hung_hai_weather_application/src/injection_container.dart';
 import 'package:quang_hung_hai_weather_application/src/widgets/custom_app_bar.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
@@ -11,21 +13,36 @@ import '../../constants/app_string.dart';
 import '../../models/city.dart';
 import '../../widgets/load_fail_widget.dart';
 
-class LocationScreen extends StatelessWidget {
+class LocationScreen extends StatefulWidget {
   final String cityName;
+
   const LocationScreen({Key? key, required this.cityName}) : super(key: key);
+
   static String displayStringForOption(City city) => city.name;
+
+  @override
+  State<LocationScreen> createState() => _LocationScreenState();
+}
+
+class _LocationScreenState extends State<LocationScreen>
+    with AfterLayoutMixin<LocationScreen> {
+  final _locationBloc = AppDependencies.injector.get<LocationBloc>();
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    AppDependencies.injector.get<LocationBloc>().add(LocationRequested());
+  }
 
   @override
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
-    context.read<LocationBloc>().add(LocationRequested());
+
     TextEditingController _fieldTextEditingController = TextEditingController();
 
     return Scaffold(
         backgroundColor: ColorsApp.primaryBackgroundColor,
         appBar: CustomAppBar(
-          subtitle: cityName,
+          subtitle: widget.cityName,
           title: AppString.location,
           widgetLeading: TextButton(
             child: Text(AppString.done,
@@ -37,6 +54,7 @@ class LocationScreen extends StatelessWidget {
           ),
         ),
         body: BlocBuilder<LocationBloc, LocationState>(
+          bloc: _locationBloc,
           builder: (context, state) {
             if (state is LocationLoadInProgress) {
               return const Center(child: CircularProgressIndicator());
@@ -50,7 +68,7 @@ class LocationScreen extends StatelessWidget {
               return Container(
                 color: ColorsApp.searchFieldColor,
                 child: Autocomplete<City>(
-                  displayStringForOption: displayStringForOption,
+                  displayStringForOption: LocationScreen.displayStringForOption,
                   fieldViewBuilder:
                       (context, controller, focusNode, onEditingComplete) {
                     _fieldTextEditingController = controller;

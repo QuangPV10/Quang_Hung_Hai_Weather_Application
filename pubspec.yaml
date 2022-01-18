@@ -14,8 +14,11 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  after_layout: ^1.1.0
   bloc: ^8.0.2
+  easy_debounce: ^2.0.2+1
   equatable: ^2.0.3
+  flutter_simple_dependency_injection: ^2.0.0
   flutter_bloc: ^8.0.1
   http: ^0.13.4
   map:

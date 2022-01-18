@@ -15,23 +15,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LocationImpl _locationImpl = LocationImpl();
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-            create: (context) =>
-                CurrentWeatherBloc(service: WeatherServiceImpl())),
-        BlocProvider(
-            create: (context) =>
-                WeekForeCastWeatherBloc(service: WeatherServiceImpl())),
-        BlocProvider(
-          create: (context) => LocationBloc(service: _locationImpl),
-        ),
-      ],
-      child: MaterialApp(
-        initialRoute: RouteNames.main,
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: RouteController().routePage,
-      ),
+    return MaterialApp(
+      initialRoute: RouteNames.main,
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: RouteController().routePage,
     );
   }
 }
