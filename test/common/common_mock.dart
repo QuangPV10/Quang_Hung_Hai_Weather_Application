@@ -12,8 +12,8 @@ class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 class MockLocationBloc extends MockBloc<SearchEvent, SearchState>
     implements SearchBloc {}
 
-class FakeLocationState extends Fake implements SearchState {}
+class FakeSearchState extends Fake implements SearchState {}
 
-class FakeLocationEvent extends Fake implements SearchEvent {}
+class FakeSearchEvent extends Fake implements SearchEvent {}
 
 class RouteFake extends Fake implements Route {}

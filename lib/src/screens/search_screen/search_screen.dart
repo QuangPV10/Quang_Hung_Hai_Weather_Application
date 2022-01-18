@@ -1,32 +1,32 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quang_hung_hai_weather_application/src/blocs/search_bloc/search_bloc.dart';
-import 'package:quang_hung_hai_weather_application/src/blocs/search_bloc/search_event.dart';
-import 'package:quang_hung_hai_weather_application/src/blocs/search_bloc/search_state.dart';
-import 'package:quang_hung_hai_weather_application/src/constants/app_theme.dart';
-import 'package:quang_hung_hai_weather_application/src/injection_container.dart';
-import 'package:quang_hung_hai_weather_application/src/widgets/custom_app_bar.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
+import '../../blocs/search_bloc/search_bloc.dart';
+import '../../blocs/search_bloc/search_event.dart';
+import '../../blocs/search_bloc/search_state.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_string.dart';
+import '../../constants/app_theme.dart';
+import '../../injection_container.dart';
 import '../../models/city.dart';
+import '../../widgets/custom_app_bar.dart';
 import '../../widgets/load_fail_widget.dart';
 
-class LocationScreen extends StatefulWidget {
+class SearchScreen extends StatefulWidget {
   final String cityName;
 
-  const LocationScreen({Key? key, required this.cityName}) : super(key: key);
-
-  static String displayStringForOption(City city) => city.name;
+  const SearchScreen({Key? key, required this.cityName}) : super(key: key);
 
   @override
-  State<LocationScreen> createState() => _LocationScreenState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _LocationScreenState extends State<LocationScreen>
-    with AfterLayoutMixin<LocationScreen> {
+String displayStringForOption(City city) => city.name;
+
+class _SearchScreenState extends State<SearchScreen>
+    with AfterLayoutMixin<SearchScreen> {
   final _locationBloc = AppDependencies.injector.get<SearchBloc>();
 
   @override
@@ -90,7 +90,7 @@ class _LocationScreenState extends State<LocationScreen>
               return Container(
                 color: ColorsApp.searchFieldColor,
                 child: Autocomplete<City>(
-                  displayStringForOption: LocationScreen.displayStringForOption,
+                  displayStringForOption: displayStringForOption,
                   fieldViewBuilder:
                       (context, controller, focusNode, onEditingComplete) {
                     _fieldTextEditingController = controller;
