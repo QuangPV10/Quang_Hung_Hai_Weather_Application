@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
+import '../../app_dependentcies.dart';
 import '../../blocs/search_bloc/search_bloc.dart';
 import '../../blocs/search_bloc/search_event.dart';
 import '../../blocs/search_bloc/search_state.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_theme.dart';
-import '../../injection_container.dart';
 import '../../models/city.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/load_fail_widget.dart';
