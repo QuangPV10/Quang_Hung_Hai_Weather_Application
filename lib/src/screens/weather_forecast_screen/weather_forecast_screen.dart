@@ -61,9 +61,9 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
 
   final double _paddingBottomCity = 30.0;
 
-  final Color _backgroundColor = ColorsApp.backgroundColor;
+  final Color _backgroundColor = AppColors.backgroundColor;
 
-  final Color _colorOfChart = ColorsApp.maxTempChartColor.withOpacity(0.8);
+  final Color _colorOfChart = AppColors.maxTempChartColor.withOpacity(0.8);
 
   @override
   void initState() {
@@ -93,7 +93,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
         .copyWith(
             fontWeight: AppFontWeight.regular,
             fontSize: 18,
-            color: ColorsApp.secondaryTextColor);
+            color: AppColors.secondaryTextColor);
 
     TextStyle _currentTemp = Theme.of(context)
         .textTheme
@@ -143,7 +143,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
         .copyWith(
             fontWeight: AppFontWeight.light,
             fontSize: 18,
-            color: ColorsApp.secondaryTextColor);
+            color: AppColors.secondaryTextColor);
 
     return Scaffold(
       appBar: CustomAppBar(

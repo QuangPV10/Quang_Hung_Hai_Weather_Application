@@ -47,11 +47,11 @@ class _SearchScreenState extends State<SearchScreen>
         .textTheme
         .copyWith()
         .bodyText2!
-        .copyWith(fontSize: 18, color: ColorsApp.secondaryTextColor);
+        .copyWith(fontSize: 18, color: AppColors.secondaryTextColor);
     TextEditingController _fieldTextEditingController = TextEditingController();
 
     return Scaffold(
-        backgroundColor: ColorsApp.primary,
+        backgroundColor: AppColors.primary,
         appBar: CustomAppBar(
           title: Column(
             children: [
@@ -74,7 +74,7 @@ class _SearchScreenState extends State<SearchScreen>
                     .copyWith(
                         fontSize: 17,
                         fontWeight: FontWeight.w400,
-                        color: ColorsApp.leadingTextColor)),
+                        color: AppColors.leadingTextColor)),
             onPressed: () => Navigator.of(context).maybePop(),
           ),
         ),
@@ -91,23 +91,23 @@ class _SearchScreenState extends State<SearchScreen>
                   title: tr('appConstants.loadFailureText'));
             } else if (state is SearchLoadSuccess) {
               return Container(
-                color: ColorsApp.searchFieldColor,
+                color: AppColors.searchFieldColor,
                 child: Autocomplete<City>(
                   displayStringForOption: displayStringForOption,
                   fieldViewBuilder:
                       (context, controller, focusNode, onEditingComplete) {
                     _fieldTextEditingController = controller;
                     return TextField(
-                        cursorColor: ColorsApp.cursorColor,
+                        cursorColor: AppColors.cursorColor,
                         autofocus: true,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.search,
-                              color: ColorsApp.searchIconColor),
+                              color: AppColors.searchIconColor),
                           suffixIcon: IconButton(
                             onPressed: () =>
                                 _fieldTextEditingController.clear(),
                             icon: const Icon(Icons.close,
-                                color: ColorsApp.searchFieldIconColor),
+                                color: AppColors.searchFieldIconColor),
                           ),
                           border: const OutlineInputBorder(
                               borderSide: BorderSide.none),
@@ -135,7 +135,7 @@ class _SearchScreenState extends State<SearchScreen>
                   optionsViewBuilder: (context, onSelected, cities) {
                     return Material(
                       child: Container(
-                        color: ColorsApp.primary,
+                        color: AppColors.primary,
                         child: ListView.separated(
                           padding: EdgeInsets.zero,
                           itemBuilder: (context, index) {

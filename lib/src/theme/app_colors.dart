@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ColorsApp {
+class AppColors {
   static const MaterialColor primary = MaterialColor(primaryValue, <int,Color>{
     50:Color(0xffeaebec),
     100:Color(0xffeaebec),

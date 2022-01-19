@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
 
   final double _paddingHorizontalOfTitle = 28.0;
 
-  final Color _colorOfChart = ColorsApp.chartColor.withOpacity(0.8);
+  final Color _colorOfChart = AppColors.chartColor.withOpacity(0.8);
 
   @override
   void afterFirstLayout(BuildContext context) {
@@ -65,7 +65,7 @@ class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
         .copyWith(
             fontWeight: AppFontWeight.light,
             fontSize: 18,
-            color: ColorsApp.secondaryTextColor);
+            color: AppColors.secondaryTextColor);
 
     TextStyle _dateTime = Theme.of(context)
         .textTheme
