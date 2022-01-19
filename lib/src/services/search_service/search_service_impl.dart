@@ -1,7 +1,7 @@
 import 'package:global_configuration/global_configuration.dart';
 
 import '../../models/city.dart';
-import './search_service.dart';
+import 'search_service.dart';
 
 class SearchServiceImpl extends SearchService {
   @override

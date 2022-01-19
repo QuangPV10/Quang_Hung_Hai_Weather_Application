@@ -27,8 +27,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
   final _currentWeatherBloc =
       AppDependencies.injector.get<CurrentWeatherBloc>();
-  City _defaultCity =
-      const City(name: "Hồ Chí Minh", longitude: 106.6667, latitude: 10.75);
+
+  late City _city;
   final double _heightOfLeadingLogoAppBar = 48.0;
 
   final double _widthOfLeadingLogoAppBar = 50.0;
@@ -41,7 +41,7 @@ class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
   void afterFirstLayout(BuildContext context) {
     AppDependencies.injector.get<CurrentWeatherBloc>().add(
           CurrentWeatherRequested(
-              lat: _defaultCity.latitude, lon: _defaultCity.longitude),
+              lat: 30, lon: 30, requireCurrentLocation: true),
         );
   }
 
@@ -85,7 +85,7 @@ class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
               child: InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, RouteNames.weatherForecast,
-                        arguments: _defaultCity);
+                        arguments: _city);
                   },
                   child: Image.asset(AppAsset.logoCloud))),
         ),
@@ -97,15 +97,16 @@ class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
                 return const Center(child: CircularProgressIndicator());
               }
               if (state is CurrentWeatherLoadSuccess) {
+                _city = state.currentWeather.city!;
                 return GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, RouteNames.location,
-                            arguments: _defaultCity.name)
+                            arguments: _city.name)
                         .then((result) {
                       if (result != null) {
                         City city = result as City;
                         setState(() {
-                          _defaultCity = city;
+                          _city = city;
                         });
                         AppDependencies.injector.get<CurrentWeatherBloc>().add(
                               CurrentWeatherRequested(
@@ -117,7 +118,7 @@ class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
                   child: Column(
                     children: [
                       Text(
-                        _defaultCity.name,
+                        state.currentWeather.city!.name,
                         style: _titleAppBarStyle,
                       ),
                       Row(
@@ -151,7 +152,7 @@ class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
           IconButton(
               onPressed: () {
                 Navigator.pushNamed(context, RouteNames.weatherForecast,
-                    arguments: _defaultCity);
+                    arguments: _city);
               },
               icon: Image.asset(AppAsset.logoSetting)),
         ],
@@ -166,7 +167,8 @@ class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
             return Stack(
               children: [
                 MapWidget(
-                    lat: _defaultCity.latitude, lon: _defaultCity.longitude),
+                    lat: state.currentWeather.city!.latitude,
+                    lon: state.currentWeather.city!.longitude),
                 SizedBox(
                   height: _heightOfColumn,
                   child: Column(

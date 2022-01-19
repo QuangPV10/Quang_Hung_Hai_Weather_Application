@@ -1,11 +1,18 @@
-import './temp_hourly.dart';
-import './weather.dart';
+import 'city.dart';
+
+import 'temp_hourly.dart';
+import 'weather.dart';
 
 class CurrentWeather {
   late int dateTime;
   late num temp;
+  late City? city;
   Weather weatherStatus;
   List<DayWeather> weatherHourlyAlerts;
+
+  set setCity(City city) {
+    this.city = city;
+  }
 
   CurrentWeather(
       {required this.dateTime,
