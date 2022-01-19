@@ -11,7 +11,7 @@ class DayTempChart extends StatelessWidget {
   final CurrentWeather weather;
   final Color color;
 
-  DayTempChart(
+  const DayTempChart(
       {required this.weather,
       required this.weatherTempAlert,
       required this.color,
