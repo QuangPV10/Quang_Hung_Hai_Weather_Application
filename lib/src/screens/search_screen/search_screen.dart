@@ -27,7 +27,7 @@ String displayStringForOption(City city) => city.name;
 
 class _SearchScreenState extends State<SearchScreen>
     with AfterLayoutMixin<SearchScreen> {
-  final _locationBloc = AppDependencies.injector.get<SearchBloc>();
+  final _searchBloc = AppDependencies.injector.get<SearchBloc>();
 
   @override
   void afterFirstLayout(BuildContext context) {
@@ -76,7 +76,7 @@ class _SearchScreenState extends State<SearchScreen>
           ),
         ),
         body: BlocBuilder<SearchBloc, SearchState>(
-          bloc: _locationBloc,
+          bloc: _searchBloc,
           builder: (context, state) {
             if (state is SearchLoadInProgress) {
               return const Center(child: CircularProgressIndicator());
