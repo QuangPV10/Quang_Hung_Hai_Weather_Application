@@ -1,5 +1,6 @@
 import 'package:global_configuration/global_configuration.dart';
-import 'package:quang_hung_hai_weather_application/src/services/http_client.dart';
+
+import '../services/http_client.dart';
 
 
 mixin HttpClientServices {

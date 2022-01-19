@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:quang_hung_hai_weather_application/src/utilities/rest_client.dart';
 import '../../models/current_weather.dart';
 import '../../models/week_forecast_weather.dart';
+import '../../utilities/rest_client.dart';
 import './weather_service.dart';
 
 class WeatherServiceImpl extends WeatherService {

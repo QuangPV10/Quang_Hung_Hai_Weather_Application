@@ -1,12 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quang_hung_hai_weather_application/src/widgets/custom_app_bar.dart';
-import 'package:quang_hung_hai_weather_application/src/widgets/load_fail_widget.dart';
 
-import '../../injection_container.dart';
-import '../../models/city.dart';
-import '../../widgets/day_temp_chart.dart';
+import '../../app_dependentcies.dart';
 import '../../blocs/current_weather_bloc/current_weather_bloc.dart';
 import '../../blocs/current_weather_bloc/current_weather_event.dart';
 import '../../blocs/current_weather_bloc/current_weather_state.dart';
@@ -17,8 +13,12 @@ import '../../constants/app_assets.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_theme.dart';
 import '../../helper/day_format.dart';
-import '../../widgets/week_temp_chart.dart';
+import '../../models/city.dart';
+import '../../widgets/custom_app_bar.dart';
+import '../../widgets/day_temp_chart.dart';
+import '../../widgets/load_fail_widget.dart';
 import '../../widgets/map.dart';
+import '../../widgets/week_temp_chart.dart';
 
 class WeatherForecastScreen extends StatefulWidget {
   final City city;
