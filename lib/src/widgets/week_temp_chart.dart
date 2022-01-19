@@ -13,8 +13,8 @@ class WeekTempChart extends StatefulWidget {
 }
 
 class WeekTempChartState extends State<WeekTempChart> {
-  final Color leftBarColor = ColorsApp.maxTempChartColor.withOpacity(0.9);
-  final Color rightBarColor = ColorsApp.tempMinChartColor.withOpacity(0.9);
+  final Color leftBarColor = AppColors.maxTempChartColor.withOpacity(0.9);
+  final Color rightBarColor = AppColors.tempMinChartColor.withOpacity(0.9);
   final double widthOfItem = 30;
   late List<BarChartGroupData> showingBarGroups;
 

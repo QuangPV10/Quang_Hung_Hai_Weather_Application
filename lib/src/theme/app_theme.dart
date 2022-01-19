@@ -6,8 +6,8 @@ class AppTheme {
   static ThemeData buildTheme() {
     return ThemeData(
       fontFamily: 'Helvetica Neue',
-      backgroundColor: ColorsApp.backgroundColor,
-      primaryColor: ColorsApp.backgroundBottomColor,
+      backgroundColor: AppColors.backgroundColor,
+      primaryColor: AppColors.backgroundBottomColor,
       textTheme: const TextTheme(
         headline1: TextStyle(
           fontSize: 96,

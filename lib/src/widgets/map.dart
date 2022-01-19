@@ -15,7 +15,7 @@ class MapWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color _mapColor = ColorsApp.blurMapColor;
+    Color _mapColor = AppColors.blurMapColor;
 
     final mapController = MapController(
       location: LatLng(lat, lon),
