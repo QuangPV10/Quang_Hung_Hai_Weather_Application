@@ -3,16 +3,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../dependencies/app_dependentcies.dart';
 import '../../blocs/current_weather_bloc/current_weather_bloc.dart';
 import '../../blocs/current_weather_bloc/current_weather_event.dart';
 import '../../blocs/current_weather_bloc/current_weather_state.dart';
 import '../../constants/app_assets.dart';
-import '../../constants/app_colors.dart';
-import '../../constants/app_theme.dart';
 import '../../constants/routes_name.dart';
+import '../../dependencies/app_dependentcies.dart';
 import '../../helper/day_format.dart';
 import '../../models/city.dart';
+import '../../theme/app_colors.dart';
+import '../../theme/app_theme.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/day_temp_chart.dart';
 import '../../widgets/map.dart';
@@ -50,25 +50,31 @@ class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
     const double _heightOfColumn = 150;
     const double _heightOfChart = 50;
 
-    final AppTheme _theme = AppTheme();
     double screenWidth = MediaQuery.of(context).size.width;
-    TextStyle _titleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.light,
-        fontSize: 18,
-        color: Colors.white);
+    TextStyle _titleAppBarStyle = Theme.of(context)
+        .textTheme
+        .copyWith()
+        .subtitle1!
+        .copyWith(
+            fontWeight: AppFontWeight.light, fontSize: 18, color: Colors.white);
 
-    TextStyle _subTitleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.light,
-        fontSize: 18,
-        color: ColorsApp.secondaryTextColor);
+    TextStyle _subTitleAppBarStyle = Theme.of(context)
+        .textTheme
+        .copyWith()
+        .subtitle2!
+        .copyWith(
+            fontWeight: AppFontWeight.light,
+            fontSize: 18,
+            color: ColorsApp.secondaryTextColor);
 
-    TextStyle _dateTime = _theme.lightTheme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.bold,
-        fontSize: 13,
-        color: Colors.white.withOpacity(1));
+    TextStyle _dateTime = Theme.of(context)
+        .textTheme
+        .copyWith()
+        .bodyText2!
+        .copyWith(
+            fontWeight: AppFontWeight.bold,
+            fontSize: 13,
+            color: Colors.white.withOpacity(1));
     return Scaffold(
       appBar: CustomAppBar(
         widgetLeading: Padding(

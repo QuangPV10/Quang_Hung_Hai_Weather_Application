@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:map/map.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:latlng/latlng.dart';
+import 'package:map/map.dart';
 
 import '../constants/app_assets.dart';
-import '../constants/app_colors.dart';
+import '../theme/app_colors.dart';
 
 class MapWidget extends StatelessWidget {
   final double lat;

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import './constants/routes_name.dart';
 import './routes/route_controller.dart';
+import 'theme/app_theme.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: AppTheme.buildTheme(),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,

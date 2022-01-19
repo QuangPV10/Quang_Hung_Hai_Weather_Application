@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 import '../models/temp_daily.dart';
-import '../constants/app_colors.dart';
+import '../theme/app_colors.dart';
 
 class WeekTempChart extends StatefulWidget {
   final List<WeekWeather> item;

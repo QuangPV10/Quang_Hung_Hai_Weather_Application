@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../dependencies/app_dependentcies.dart';
 import '../../blocs/current_weather_bloc/current_weather_bloc.dart';
 import '../../blocs/current_weather_bloc/current_weather_event.dart';
 import '../../blocs/current_weather_bloc/current_weather_state.dart';
@@ -10,10 +9,11 @@ import '../../blocs/week_forecast_weather_bloc/week_forecast_weather_bloc.dart';
 import '../../blocs/week_forecast_weather_bloc/week_forecast_weather_event.dart';
 import '../../blocs/week_forecast_weather_bloc/week_forecast_weather_state.dart';
 import '../../constants/app_assets.dart';
-import '../../constants/app_colors.dart';
-import '../../constants/app_theme.dart';
+import '../../dependencies/app_dependentcies.dart';
 import '../../helper/day_format.dart';
 import '../../models/city.dart';
+import '../../theme/app_colors.dart';
+import '../../theme/app_theme.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/day_temp_chart.dart';
 import '../../widgets/load_fail_widget.dart';
@@ -79,51 +79,71 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
 
   @override
   Widget build(BuildContext context) {
-    AppTheme _theme = AppTheme();
     double screenWidth = MediaQuery.of(context).size.width;
-    TextStyle _titleOfForecast = _theme.lightTheme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontSize: 18,
-        color: Colors.white);
+    TextStyle _titleOfForecast = Theme.of(context)
+        .textTheme
+        .copyWith()
+        .bodyText2!
+        .copyWith(fontSize: 18, color: Colors.white);
 
-    TextStyle _monthOfForecast = _theme.lightTheme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.regular,
-        fontSize: 18,
-        color: ColorsApp.secondaryTextColor);
+    TextStyle _monthOfForecast = Theme.of(context)
+        .textTheme
+        .copyWith()
+        .bodyText2!
+        .copyWith(
+            fontWeight: AppFontWeight.regular,
+            fontSize: 18,
+            color: ColorsApp.secondaryTextColor);
 
-    TextStyle _currentTemp = _theme.lightTheme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.thin,
-        fontSize: 100,
-        color: Colors.white);
+    TextStyle _currentTemp = Theme.of(context)
+        .textTheme
+        .copyWith()
+        .bodyText2!
+        .copyWith(
+            fontWeight: AppFontWeight.thin, fontSize: 100, color: Colors.white);
 
-    TextStyle _currentCity = _theme.lightTheme.textTheme.bodyText1!.copyWith(
-        fontWeight: AppFontWeight.regular, fontSize: 38, color: Colors.white);
+    TextStyle _currentCity = Theme.of(context)
+        .textTheme
+        .copyWith()
+        .bodyText1!
+        .copyWith(
+            fontWeight: AppFontWeight.regular,
+            fontSize: 38,
+            color: Colors.white);
 
-    TextStyle _currentWeather = _theme.lightTheme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.regular,
-        fontSize: 20,
-        color: Colors.white);
+    TextStyle _currentWeather = Theme.of(context)
+        .textTheme
+        .copyWith()
+        .bodyText2!
+        .copyWith(
+            fontWeight: AppFontWeight.regular,
+            fontSize: 20,
+            color: Colors.white);
 
-    TextStyle _dateTime = _theme.lightTheme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.thin,
-        fontSize: 13,
-        color: Colors.white.withOpacity(1));
+    TextStyle _dateTime = Theme.of(context)
+        .textTheme
+        .copyWith()
+        .bodyText2!
+        .copyWith(
+            fontWeight: AppFontWeight.thin,
+            fontSize: 13,
+            color: Colors.white.withOpacity(1));
 
-    TextStyle _titleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.light,
-        fontSize: 20,
-        color: Colors.white);
+    TextStyle _titleAppBarStyle = Theme.of(context)
+        .textTheme
+        .copyWith()
+        .bodyText2!
+        .copyWith(
+            fontWeight: AppFontWeight.light, fontSize: 20, color: Colors.white);
 
-    TextStyle _subTitleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!.copyWith(
-        fontFamily: AppFont.fontHelveticaNeue,
-        fontWeight: AppFontWeight.light,
-        fontSize: 18,
-        color: ColorsApp.secondaryTextColor);
+    TextStyle _subTitleAppBarStyle = Theme.of(context)
+        .textTheme
+        .copyWith()
+        .bodyText2!
+        .copyWith(
+            fontWeight: AppFontWeight.light,
+            fontSize: 18,
+            color: ColorsApp.secondaryTextColor);
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -136,8 +156,12 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
         ),
         title: Column(
           children: [
-             Text(tr('weatherForecastScreen.weatherForecast'),style: _titleAppBarStyle),
-             Text(_city.name,style: _subTitleAppBarStyle,),
+            Text(tr('weatherForecastScreen.weatherForecast'),
+                style: _titleAppBarStyle),
+            Text(
+              _city.name,
+              style: _subTitleAppBarStyle,
+            ),
           ],
         ),
         actionWidget: [
@@ -405,7 +429,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                                         lat: _city.latitude,
                                         lon: _city.longitude));
                               },
-                              title:  tr('appConstants.loadFailureText'),
+                              title: tr('appConstants.loadFailureText'),
                             ),
                           );
                         }

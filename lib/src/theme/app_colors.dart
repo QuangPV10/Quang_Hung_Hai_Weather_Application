@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
 
 class ColorsApp {
+  static const MaterialColor primary = MaterialColor(primaryValue, <int,Color>{
+    50:Color(0xffeaebec),
+    100:Color(0xffeaebec),
+    200:Color(0xffeaebec),
+    300:Color(0xffeaebec),
+    400:Color(0xffeaebec),
+    500:Color(primaryValue),
+    600:Color(0xffeaebec),
+    700:Color(0xffeaebec),
+    800:Color(0xffeaebec),
+    900:Color(0xffeaebec)
+  });
+  static const primaryValue = 0xff4e555e;
   static const Color backgroundColor = Color(0xff111427);
   static const Color backgroundBottomColor = Color(0xfff8f9fd);
   static const Color maxTempChartColor = Color(0xffF1961C);
   static const Color tempMinChartColor = Color(0xff6B87BC);
   static const Color blurMapColor = Color(0xff4E555E);
 
-  static const primaryBackgroundColor = Color(0xff4e555e);
   static const secondaryBackgroundColor = Color(0xff3A424C);
   static const primaryTextColor = Color(0xffffffff);
   static const secondaryTextColor = Color(0xffa3a7aa);

@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
-import '../../dependencies/app_dependentcies.dart';
 import '../../blocs/search_bloc/search_bloc.dart';
 import '../../blocs/search_bloc/search_event.dart';
 import '../../blocs/search_bloc/search_state.dart';
-import '../../constants/app_colors.dart';
-import '../../constants/app_theme.dart';
+import '../../dependencies/app_dependentcies.dart';
 import '../../models/city.dart';
+import '../../theme/app_colors.dart';
+import '../../theme/app_theme.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/load_fail_widget.dart';
 
@@ -36,23 +36,22 @@ class _SearchScreenState extends State<SearchScreen>
 
   @override
   Widget build(BuildContext context) {
-    AppTheme _theme = AppTheme();
-    TextStyle _titleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!
+    TextStyle _titleAppBarStyle = Theme.of(context)
+        .textTheme
+        .copyWith()
+        .bodyText2!
         .copyWith(
-            fontFamily: AppFont.fontHelveticaNeue,
-            fontWeight: AppFontWeight.light,
-            fontSize: 20,
-            color: Colors.white);
+            fontWeight: AppFontWeight.light, fontSize: 20, color: Colors.white);
 
-    TextStyle _subTitleAppBarStyle = _theme.lightTheme.textTheme.bodyText2!
-        .copyWith(
-            fontFamily: AppFont.fontHelveticaNeue,
-            fontSize: 18,
-            color: ColorsApp.secondaryTextColor);
+    TextStyle _subTitleAppBarStyle = Theme.of(context)
+        .textTheme
+        .copyWith()
+        .bodyText2!
+        .copyWith(fontSize: 18, color: ColorsApp.secondaryTextColor);
     TextEditingController _fieldTextEditingController = TextEditingController();
 
     return Scaffold(
-        backgroundColor: ColorsApp.primaryBackgroundColor,
+        backgroundColor: ColorsApp.primary,
         appBar: CustomAppBar(
           title: Column(
             children: [
@@ -68,10 +67,14 @@ class _SearchScreenState extends State<SearchScreen>
           ),
           widgetLeading: TextButton(
             child: Text(tr('searchScreen.done'),
-                style: _theme.lightTheme.textTheme.bodyText2!.copyWith(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400,
-                    color: ColorsApp.leadingTextColor)),
+                style: Theme.of(context)
+                    .textTheme
+                    .copyWith()
+                    .bodyText2!
+                    .copyWith(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w400,
+                        color: ColorsApp.leadingTextColor)),
             onPressed: () => Navigator.of(context).maybePop(),
           ),
         ),
@@ -132,7 +135,7 @@ class _SearchScreenState extends State<SearchScreen>
                   optionsViewBuilder: (context, onSelected, cities) {
                     return Material(
                       child: Container(
-                        color: ColorsApp.primaryBackgroundColor,
+                        color: ColorsApp.primary,
                         child: ListView.separated(
                           padding: EdgeInsets.zero,
                           itemBuilder: (context, index) {
@@ -144,8 +147,10 @@ class _SearchScreenState extends State<SearchScreen>
                                 title: SubstringHighlight(
                                     text: city.name,
                                     term: _fieldTextEditingController.text,
-                                    textStyle: _theme
-                                        .lightTheme.textTheme.headline6!
+                                    textStyle: Theme.of(context)
+                                        .textTheme
+                                        .copyWith()
+                                        .headline6!
                                         .copyWith(color: Colors.grey),
                                     textStyleHighlight: const TextStyle(
                                         fontWeight: FontWeight.w900,
