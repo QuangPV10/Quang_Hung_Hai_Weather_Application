@@ -7,6 +7,7 @@ import './src/app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GlobalConfiguration().loadFromAsset("app_config");
+  await GlobalConfiguration().loadFromPath("assets/data/city_list.json");
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(

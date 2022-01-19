@@ -1,18 +1,14 @@
-import 'dart:convert';
+import 'package:global_configuration/global_configuration.dart';
 
-import 'package:flutter/services.dart';
-
-import '../../constants/app_assets.dart';
 import '../../models/city.dart';
 import './search_service.dart';
 
 class SearchServiceImpl extends SearchService {
   @override
   Future<List<City>> fetchAllCity() async {
-    final jsonData = await rootBundle.loadString(AppAsset.data);
-    Iterable responseList = json.decode(jsonData);
+    final jsonData = GlobalConfiguration().getValue('cityList') as List<dynamic>;
     var cities =
-        List<City>.from(responseList.map((model) => City.fromJson(model)));
+        List<City>.from(jsonData.map((model) => City.fromJson(model)));
     return cities;
   }
 }
