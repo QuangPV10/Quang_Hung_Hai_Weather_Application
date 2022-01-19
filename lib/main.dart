@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
 
-import './src/app.dart';
+import 'src/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +16,7 @@ void main() async {
       ],
       path: 'assets/translations',
       startLocale: const Locale('en', 'US'),
-      child:  const MyApp(),
+      child: const MyApp(),
     ),
   );
 }

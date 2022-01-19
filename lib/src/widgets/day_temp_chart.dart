@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quang_hung_hai_weather_application/src/theme/app_theme.dart';
+import '../theme/app_theme.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 import '../helper/day_format.dart';

@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 
 import '../../models/week_forecast_weather.dart';
 import '../../services/weather_service/weather_service.dart';
-import './week_forecast_weather_event.dart';
-import './week_forecast_weather_state.dart';
+import 'week_forecast_weather_event.dart';
+import 'week_forecast_weather_state.dart';
 
 class WeekForeCastWeatherBloc
     extends Bloc<WeekForeCastWeatherEvent, WeekForeCastWeatherState> {

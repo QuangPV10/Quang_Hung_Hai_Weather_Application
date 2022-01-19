@@ -1,4 +1,4 @@
-import './weather.dart';
+import 'weather.dart';
 
 class DayWeather {
   late double temp;
