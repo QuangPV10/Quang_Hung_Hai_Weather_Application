@@ -1,9 +1,9 @@
 import 'package:flutter_simple_dependency_injection/injector.dart';
 
-import './search_service/search_service_impl.dart';
-import './search_service/search_service.dart';
-import './weather_service/weather_service.dart';
-import './weather_service/weather_service_impl.dart';
+import '../services/search_service/search_service_impl.dart';
+import '../services/search_service/search_service.dart';
+import '../services/weather_service/weather_service.dart';
+import '../services/weather_service/weather_service_impl.dart';
 
 class ServicesDependencies {
   static Injector initialise(Injector injector) {

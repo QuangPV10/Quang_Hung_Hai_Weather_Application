@@ -1,6 +1,6 @@
 import 'package:global_configuration/global_configuration.dart';
 
-import '../services/http_client.dart';
+import 'http_client.dart';
 
 
 mixin HttpClientServices {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
-import '../../app_dependentcies.dart';
+import '../../dependencies/app_dependentcies.dart';
 import '../../blocs/search_bloc/search_bloc.dart';
 import '../../blocs/search_bloc/search_event.dart';
 import '../../blocs/search_bloc/search_state.dart';
