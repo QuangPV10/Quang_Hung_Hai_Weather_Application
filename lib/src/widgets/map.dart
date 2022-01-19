@@ -10,12 +10,13 @@ class MapWidget extends StatelessWidget {
   final double lat;
   final double lon;
 
-  MapWidget({Key? key, required this.lat, required this.lon}) : super(key: key);
-
-  Color mapColor = ColorsApp.blurMapColor;
+  const MapWidget({Key? key, required this.lat, required this.lon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Color _mapColor = ColorsApp.blurMapColor;
+
     final mapController = MapController(
       location: LatLng(lat, lon),
     );
@@ -25,16 +26,16 @@ class MapWidget extends StatelessWidget {
         return Stack(
           children: [
             CachedNetworkImage(
-              imageUrl:MapImage(z: z, x: x, y: y).map,
+              imageUrl: MapImage(z: z, x: x, y: y).map,
               placeholder: (context, url) => const CircularProgressIndicator(),
               errorWidget: (context, url, error) => const Icon(Icons.error),
               fit: BoxFit.cover,
-              color: mapColor,
+              color: _mapColor,
               colorBlendMode: BlendMode.hardLight,
             ),
             CachedNetworkImage(
               errorWidget: (context, url, error) => const Icon(Icons.error),
-              imageUrl:WeatherImage(z: z, x: x, y: y).map,
+              imageUrl: WeatherImage(z: z, x: x, y: y).map,
               fit: BoxFit.cover,
             ),
           ],

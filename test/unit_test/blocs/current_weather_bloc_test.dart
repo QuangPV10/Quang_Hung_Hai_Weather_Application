@@ -12,7 +12,6 @@ class MockWeatherService extends Mock implements WeatherService {}
 
 void main() {
   WeatherService service ;
-  CurrentWeatherBloc? currentWeatherBloc;
   double lat = 34.330502;
   double lon = 47.159401;
 
